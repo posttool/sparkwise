@@ -1,3 +1,4 @@
+{{{
 AddDashboard(String)
 AddEvent(String, Date, String)
 AddWidget(long, long, int, int)
@@ -47,3 +48,4 @@ UnpublishDashboard(long)
 UpdateEvent(long, String, Date, String)
 UpdatePropsForWidget(long, OBJECT)
 UpdateWidgetRect(long, int, int, int, int)
+}}}
