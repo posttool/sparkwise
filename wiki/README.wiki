@@ -1,3 +1,6 @@
+The code base is in the process of being checked in... The Java code is available in truck/src, the Javascript/HTML is coming soon. Contact info is at the bottom of this document if you would like to discuss.
+
+
 Requires the following:
 
   * Java 6 or 7
@@ -5,8 +8,7 @@ Requires the following:
   * ImageMagick
   * Tomcat/Other container
 
-All other requirements are distributed in the WEB-INF/lib directory under the following licenses:
-
+All other server side requirements are distributed in the WEB-INF/lib directory under the following licenses:
 
 Apache
 	
@@ -50,6 +52,20 @@ Use Ant (build.xml) to create a deployable WAR file. Make sure to setup deployme
 with appropriate deployment values. S3 is used by default to host images for Upload widget. This 
 can be replaced with a file system path provider (TODO show example) if S3 is not an option.
 
+The following libraries are used on the client side:
+
+  * jquery  (MIT or GPL Version 2)
+  * jquery-ui  (MIT or GPL Version 2)
+  * jquery.animate-enhanced (MIT)
+  * jquery.cookie (MIT)
+  * jquery.disable.text.select (MIT)
+  * jquery.editable (MIT)
+  * jquery.field  (MIT or GPL Version 2)
+  * jquery.mousewheel (MIT)
+  * jquery.selectbox (MIT)
+  * jscrollpanel (MIT or GPL)
+  * markercluster (Apache 2)
+  * raphael (MIT)
 
 Contact David Karam
 dkaram@sparkwi.se
