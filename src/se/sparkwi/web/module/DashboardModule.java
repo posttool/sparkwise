@@ -345,6 +345,9 @@ public class DashboardModule extends WebStoreModule implements IEventListener
 	{
 		OBJECT ret = new OBJECT();
 		Entity dash = get_dashboard(dash_id);
+		Boolean is_public = (Boolean)dash.getAttribute(DASHBOARD_FIELD_PUBLIC);
+		if (!is_public)
+			throw new WebApplicationException("NO SUCH DASHBOARD");
 		ret.put("dashboard",ENTITY_TO_OBJECT(dash));
 		ret.put("widget_instances",ENTITIES_TO_OBJECTS(get_widgets_for_dashboard(dash, true)));
 		return ret;
