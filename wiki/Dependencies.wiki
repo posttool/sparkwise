@@ -1,5 +1,7 @@
 All server side requirements are distributed in the `WEB-INF/lib` directory:
 
+See [http://code.google.com/p/sparkwise/source/browse/#svn%2Ftrunk%2FWebContent%2FWEB-INF%2Flib%253Fstate%253Dopen WEB-INF/lib]
+
 Apache
 	
   * commons-codec (http://commons.apache.org/codec/)
