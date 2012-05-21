@@ -167,6 +167,7 @@
 				<module-slot name="dashboard-module"  instance="Dashboard"/>
 			</module-slots>
 		</module>
+	</modules>
 
 </application>
 
