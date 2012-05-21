@@ -16,58 +16,7 @@ The following configuration will work for Debian/Ubuntu:
 # apt-get install libdb4.7-java
 # apt-get install imagemagick
 }}}
-All other server side requirements are distributed in the WEB-INF/lib directory:
 
-Apache
-	
-  * commons-codec-1.4 (http://commons.apache.org/codec/)
-  * commons-fileupload-1.2.1 (http://commons.apache.org/fileupload/)
-  * commons-httpclient-3.1 (http://hc.apache.org/httpclient-3.x/)
-  * commons-io-1.2 (http://commons.apache.org/io/)
-  * commons-logging-1.1.1(http://commons.apache.org/logging/)
-  * poi-3.2 (http://poi.apache.org/)
-  * httpclient-4.1.2 (http://hc.apache.org/httpcomponents-client-ga/)
-  * httpclient-cache-4.1.2 (http://hc.apache.org/httpcomponents-client-ga/)
-  * httpcore-4.1.3 (http://hc.apache.org/httpcomponents-core-ga/)
-  * httpcore-nio-4.1.3 (http://hc.apache.org/httpcomponents-core-ga/httpcore-nio/)
-  * httpmime-4.1.2 (http://hc.apache.org/httpcomponents-client-ga/httpmime/)
-  * mina-core-1.1.2 (http://mina.apache.org/)
-  * log4j-1.2.9 (http://logging.apache.org/log4j/1.2/)
-
-Page Society / Post Tool (Apache 2)
-
-  * ps_persistence.jar (https://github.com/posttool/PSWebV1.0 )
-  * ps_web.jar (https://github.com/posttool/PSPersistenceV1.0)
-
-Oracle
-
-  * db.jar (http://www.oracle.com/technetwork/database/berkeleydb/downloads/oslicense-093458.html)
-	
-Others
-
-  * mail.jar (CDDL-1.0, BSD, GPL-2.0, GNU-Classpath http://kenai.com/projects/javamail)
-  * jdring-2.0.jar (LGPL http://www.jtheory.com/jdring.html)
-  * gson.jar (Apache2 http://code.google.com/p/google-gson/)
-  * freemarker.jar (BSD style http://freemarker.org/docs/app_license.html)
-  * uuid-3.2.jar (MIT http://johannburkard.de/software/uuid/)
-
-Use Ant (build.xml) to create a deployable WAR file. Make sure to setup deployment.properties
-with appropriate deployment values. S3 is used by default to host images for Upload widget. This 
-can be replaced with the local file system if S3 is not an option.
-
-The following libraries are used on the client side:
-
-  * raphaeljs (MIT http://raphaeljs.com/)
-  * jquery  (MIT http://jquery.com/)
-  * jquery-ui  (MIT http://jqueryui.com/)
-  * jquery.animate-enhanced (MIT https://github.com/benbarnett/jQuery-Animate-Enhanced)
-  * jquery.cookie (MIT https://github.com/carhartl/jquery-cookie)
-  * jquery.editable (MIT http://www.arashkarimzadeh.com/jquery/7-editable-jquery-plugin.html)
-  * jquery.field  (MIT http://www.pengoworks.com/workshop/jquery/field/field.plugin.htm)
-  * jquery.mousewheel (MIT http://brandonaaron.net/code/mousewheel/docs)
-  * jquery.selectbox (MIT http://www.bulgaria-web-developers.com/projects/javascript/selectbox/)
-  * jscrollpanel (MIT http://jscrollpane.kelvinluck.com/)
-  * markercluster (Apache 2 http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclusterer/)
 
 Contact David Karam
 dkaram@sparkwi.se
