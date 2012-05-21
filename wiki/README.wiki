@@ -15,7 +15,6 @@ The following configuration will work for Debian/Ubuntu:
 # apt-get install tomcat6
 # apt-get install libdb4.7-java
 # apt-get install imagemagick
-# apt-get install ant (optional)
 }}}
 All other server side requirements are distributed in the WEB-INF/lib directory:
 
