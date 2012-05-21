@@ -1,6 +1,6 @@
 =Sparkwise README=
 
-The code base is in the process of being checked in... The Java code is available in truck/src, the Javascript/HTML is coming soon. Contact info is at the bottom of this document if you would like to discuss.
+_The code base is in the process of being checked in... Java code is available in truck/src, the Javascript/HTML is coming soon. Contact info is at the bottom of this document if you would like to discuss._
 
 The Sparkwise application requires a server configured with the following software:
 
@@ -10,13 +10,13 @@ The Sparkwise application requires a server configured with the following softwa
   * Tomcat 6 (or compatible web container)
 
 The following configuration will work for Debian/Ubuntu:
-
-apt-get install openjdk-6-jdk
-apt-get install tomcat6
-apt-get install libdb4.7-java
-apt-get install imagemagick
-apt-get install ant (optional)
-
+{{{
+# apt-get install openjdk-6-jdk
+# apt-get install tomcat6
+# apt-get install libdb4.7-java
+# apt-get install imagemagick
+# apt-get install ant (optional)
+}}}
 All other server side requirements are distributed in the WEB-INF/lib directory:
 
 Apache
@@ -58,18 +58,17 @@ can be replaced with the local file system if S3 is not an option.
 
 The following libraries are used on the client side:
 
-  * raphaeljs (MIT)
-  * jquery  (MIT or GPL Version 2)
-  * jquery-ui  (MIT or GPL Version 2)
-  * jquery.animate-enhanced (MIT)
-  * jquery.cookie (MIT)
-  * jquery.disable.text.select (MIT)
-  * jquery.editable (MIT)
-  * jquery.field  (MIT or GPL Version 2)
-  * jquery.mousewheel (MIT)
-  * jquery.selectbox (MIT)
-  * jscrollpanel (MIT or GPL)
-  * markercluster (Apache 2)
+  * raphaeljs (MIT http://raphaeljs.com/)
+  * jquery  (MIT http://jquery.com/)
+  * jquery-ui  (MIT http://jqueryui.com/)
+  * jquery.animate-enhanced (MIT https://github.com/benbarnett/jQuery-Animate-Enhanced)
+  * jquery.cookie (MIT https://github.com/carhartl/jquery-cookie)
+  * jquery.editable (MIT http://www.arashkarimzadeh.com/jquery/7-editable-jquery-plugin.html)
+  * jquery.field  (MIT http://www.pengoworks.com/workshop/jquery/field/field.plugin.htm)
+  * jquery.mousewheel (MIT http://brandonaaron.net/code/mousewheel/docs)
+  * jquery.selectbox (MIT http://www.bulgaria-web-developers.com/projects/javascript/selectbox/)
+  * jscrollpanel (MIT http://jscrollpane.kelvinluck.com/)
+  * markercluster (Apache 2 http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclusterer/)
 
 Contact David Karam
 dkaram@sparkwi.se
