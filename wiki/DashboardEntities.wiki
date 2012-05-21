@@ -1,0 +1,68 @@
+{{{
+Project
+	name : String
+	uuid : String
+
+Dashboard
+	parent : Project
+	name : String
+	description : String
+	tags : String[]
+	public : boolean
+	public_name : String
+	public_org : String
+	uuid : String
+
+Widget 
+	name : String
+	description : String
+	class_name : String
+
+WidgetInstance
+	parent : Dashboard
+	type : enum()
+	state : enum()
+	name : String
+	rect : int[]
+	display_props : Map
+	proxy : WidgetDataProxy
+	children : WidgetDataProxy[]
+	uuid : String
+
+WidgetDataProxy
+	parent : Project
+	widget : Widget
+	connection : Connection
+	state : enum()
+	selector_values : Map
+	selector_display_values : Map
+	props : Map
+	last_failure_message : String
+	last_updated : Date
+
+WidgetData
+	parent : WidgetDataProxy
+	date_utc : Date
+	date_key : String
+	field_data : Map
+	error_code : String
+	error_message : String
+
+MySet
+	widgets : WidgetInstance[]
+
+WidgetCollection
+	name : String
+	categories : WidgetCollectionCategory[]		
+
+WidgetCollectionCategory
+	name : String
+	widgets : Widget[]
+
+Event
+	parent : Project
+	name : String
+	description : String
+	date_utc : Date
+
+}}}
