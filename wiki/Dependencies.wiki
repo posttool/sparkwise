@@ -1,6 +1,8 @@
-All server side requirements are distributed in the `WEB-INF/lib` directory:
+All server side requirements are distributed with the application, along with respective source code, documentation and license information. 
 
 See [http://code.google.com/p/sparkwise/source/browse/#svn%2Ftrunk%2FWebContent%2FWEB-INF%2Flib%253Fstate%253Dopen WEB-INF/lib]
+
+Following is a list of the included libraries:
 
 Apache
 	
