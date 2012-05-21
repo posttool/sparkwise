@@ -370,6 +370,9 @@ public class DashboardModule extends WebStoreModule implements IEventListener
 		Entity project = get_project_for_dashboard(dash);
 		OBJECT ret = new OBJECT();
 		widget = FILL_DEEP_AND_MASK(widget,FILL_ALL_FIELDS,SPARKWISE_MASK_FIELDS);
+		Boolean is_public = (Boolean)dash.getAttribute(WIDGETINSTANCE_FIELD_PUBLIC);
+		if (!is_public)
+			throw new WebApplicationException("NO SUCH WIDGET");
 		Entity proxy = (Entity)widget.getAttribute(WIDGETINSTANCE_FIELD_PROXY);
 		Entity def = (Entity)proxy.getAttribute(WIDGETDATAPROXY_FIELD_WIDGET);
 		ret.put("widget", ENTITY_TO_OBJECT(widget));
@@ -3507,6 +3510,7 @@ public class DashboardModule extends WebStoreModule implements IEventListener
 	public static final String WIDGETINSTANCE_FIELD_PROXY 		= "proxy";
 	public static final String WIDGETINSTANCE_FIELD_CHILDREN 	= "children";
 	public static final String WIDGETINSTANCE_FIELD_UUID 		= "uuid";
+	public static final String WIDGETINSTANCE_FIELD_PUBLIC 		= "public";
 
 	public static final String MYSET_ENTITY 					= "MySet";
 	public static final String MYSET_FIELD_WIDGETS 				= "widgets";
@@ -3582,7 +3586,8 @@ public class DashboardModule extends WebStoreModule implements IEventListener
 			WIDGETINSTANCE_FIELD_PROPS,Types.TYPE_STRING,null,
 			WIDGETINSTANCE_FIELD_PROXY,Types.TYPE_REFERENCE, WIDGETDATAPROXY_ENTITY,null,
 			WIDGETINSTANCE_FIELD_CHILDREN,Types.TYPE_ARRAY|Types.TYPE_REFERENCE, WIDGETDATAPROXY_ENTITY,null,
-			WIDGETINSTANCE_FIELD_UUID,Types.TYPE_STRING,null);
+			WIDGETINSTANCE_FIELD_UUID,Types.TYPE_STRING,null,
+			WIDGETINSTANCE_FIELD_PUBLIC,Types.TYPE_BOOLEAN,false);
 		
 		DEFINE_ENTITY(MYSET_ENTITY,
 				MYSET_FIELD_WIDGETS, Types.TYPE_REFERENCE|Types.TYPE_ARRAY, WIDGETINSTANCE_ENTITY, EMPTY_LIST);
