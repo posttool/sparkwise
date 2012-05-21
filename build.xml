@@ -92,7 +92,7 @@ along with Sparkwise.  If not, see <http://www.gnu.org/licenses/>.
 		<mkdir dir="${js_bp}" />
 
 		<exec dir="." executable="java" failonerror="true">
-			<arg line="-classpath compiler.jar" />
+			<arg line="-classpath WebContent/WEB-INF/lib/compiler.jar" />
 			<arg line="com.google.javascript.jscomp.CommandLineRunner" />
 			<arg line="--compilation_level SIMPLE_OPTIMIZATIONS" />
 
