@@ -1,0 +1,172 @@
+<application name="SparkWise"
+			 version="01.04.2012"
+			 class="se.sparkwi.web.SparkWiseApplication"
+			 web-root-directory="$WEB_ROOT_DIR"
+			 web-root-url="$WEB_ROOT_URL"
+			 web-root-url-secure="$WEB_ROOT_URL_SECURE"
+			 module-data-directory="$MODULE_DATA_DIRECTORY"
+			 >
+
+	<modules>
+		<module name="ApplicationInfoModule">
+			<module-class>com.pagesociety.web.module.application.ApplicationInfoModule</module-class>
+		</module>
+
+		<module name="Permissions">
+			<module-class>se.sparkwi.web.module.SparkwisePermissionsModule</module-class>
+			<module-slots>
+				<module-slot name="store" instance="Store"/>
+			</module-slots>
+		</module>
+
+		<module name="Store">
+			<module-class>com.pagesociety.web.module.persistence.BDBPersistenceModule</module-class>
+				<module-params>
+					<store-root-directory>$DB_ROOT_DIR</store-root-directory>
+					<store-backup-directory>$DB_BACKUP_DIR</store-backup-directory>
+				</module-params>
+		</module>
+		
+		<module name="User">
+			<module-class>com.pagesociety.web.module.user.UserModule</module-class>
+			<module-slots>
+				<module-slot name="store" instance="Store"/>
+				<module-slot name="permissions-module" instance="Permissions"/>
+			</module-slots>
+		</module>
+
+		<module name="Email">
+			<module-class>com.pagesociety.web.module.email.QueuedEmailModule</module-class>
+			<module-params>
+				<smtp-server>$SMTP_SERVER</smtp-server>
+				<smtp-server-use-ssl>true</smtp-server-use-ssl>
+				<smtp-server-port>$SMTP_SERVER_PORT</smtp-server-port>
+				<smtp-server-username>$SMTP_SERVER_USERNAME</smtp-server-username>
+				<smtp-server-password>$SMTP_SERVER_PASSWORD</smtp-server-password>
+				<email-template-dir>$EMAIL_TEMPLATE_DIR</email-template-dir>
+				<email-return-address>support@sparkwi.se</email-return-address>
+				<email-queue-size>1024</email-queue-size>
+				<throttle-in-ms>500</throttle-in-ms>
+			</module-params>
+		</module>
+
+		<module name="Registration">
+			<module-class>se.sparkwi.web.module.SparkwiseRegistration</module-class>
+			<module-slots>
+				<module-slot name="store" 		 instance="Store"/>
+				<module-slot name="user-module"  instance="User"/>
+				<module-slot name="email-module" instance="Email"/>
+				<module-slot name="mailing-list-module" instance="Newsletter"/>
+			</module-slots>
+			<module-params>
+				<do-email-confirmation>true</do-email-confirmation>
+				<registration-email-template>confirm-registration.fm</registration-email-template>
+				<registration-email-subject>Welcome To Sparkwise</registration-email-subject>
+				<activate-account-url>$WEB_ROOT_URL/activate-registration.fhtml</activate-account-url>
+			</module-params>
+		</module>
+
+		<module name="Feedback">
+			<module-class>se.sparkwi.web.module.FeedbackModule</module-class>
+			<module-slots>
+				<module-slot name="store" 		 instance="Store"/>
+				<module-slot name="email-module" instance="Email"/>
+			</module-slots>
+		</module>
+
+	
+		<module name="Authorization">
+			<module-class>se.sparkwi.web.module.auth.OAuthorizationModule</module-class>
+			<module-slots>
+				<module-slot name="store" instance="Store"/>
+				<module-slot name="permissions-module" instance="Permissions"/>
+			</module-slots>
+			<module-params>
+				<twitter-consumer-key>$TWITTER_CONSUMER_KEY</twitter-consumer-key>
+				<twitter-consumer-secret-key>$TWITTER_CONSUMER_SECRET_KEY</twitter-consumer-secret-key>
+				<vimeo-consumer-key>$VIMEO_CONSUMER_KEY</vimeo-consumer-key>
+				<vimeo-consumer-secret-key>$VIMEO_CONSUMER_SECRET_KEY</vimeo-consumer-secret-key>
+				<gdata-consumer-key>$GDATA_CONSUMER_KEY</gdata-consumer-key>
+				<gdata-consumer-secret-key>$GDATA_CONSUMER_SECRET_KEY</gdata-consumer-secret-key>
+				<youtube-developer-key>$YOUTUBE_DEVELOPER_KEY</youtube-developer-key>
+				<facebook-app-id>$FACEBOOK_APP_ID</facebook-app-id>
+				<facebook-secret-key>$FACEBOOK_SECRET_KEY</facebook-secret-key>
+				<flickr-consumer-key>$FLICKR_CONSUMER_KEY</flickr-consumer-key>
+				<flickr-secret-key>$FLICKR_SECRET_KEY</flickr-secret-key>
+				<bing-app-id>$BING_APP_ID</bing-app-id>
+				<api-fail-every-x-calls>$AUTO_FAIL_ON_EVERY_X_API_CALLS</api-fail-every-x-calls>
+			</module-params>
+		</module>
+
+
+		<module name="Dashboard">
+			<module-class>se.sparkwi.web.module.DashboardModule</module-class>
+			<module-slots>
+				<module-slot name="store" instance="Store"/>
+				<module-slot name="permissions-module" instance="Permissions"/>
+				<module-slot name="authorization-module" instance="Authorization"/>
+			</module-slots>
+			<module-params>
+				<collect-data-hour>$DATA_COLLECT_HOUR</collect-data-hour>
+				<collect-data-minute>$DATA_COLLECT_MINUTE</collect-data-minute>
+				<widget-config-file>$WIDGET_CONFIG</widget-config-file>
+				<delete-user-data-on-login>$DELETE_USER_DATA_ON_LOGIN</delete-user-data-on-login>
+				<delete-widgets-on-bootstrap>$DELETE_WIDGETS_ON_BOOTSTRAP</delete-widgets-on-bootstrap>
+				<date-quantize-unit>$DATE_QUANTIZE_UNIT</date-quantize-unit>
+				<date-quantize-resolution>$DATE_QUANTIZE_RESOLUTION</date-quantize-resolution>
+			</module-params>
+		</module>
+
+		<module name="ForgotPassword">
+			<module-class>com.pagesociety.web.module.registration.ForgotPasswordModule</module-class>
+			<module-slots>
+				<module-slot name="store" 		 instance="Store"/>
+				<module-slot name="user-module"  instance="User"/>
+				<module-slot name="email-module" instance="Email"/>
+			</module-slots>
+			<module-params>
+				<forgot-password-email-template>forgot-password.fm</forgot-password-email-template>
+				<forgot-password-email-subject>Your Password Request</forgot-password-email-subject>
+				<restore-password-url>$WEB_ROOT_URL/forgot-password-fwd.fhtml</restore-password-url>
+			</module-params>
+		</module>
+
+
+		<module name="ResourcePathProvider">
+			<module-class>com.pagesociety.web.module.S3.PSS3PathProvider</module-class>	
+			<module-slots>
+				<module-slot name="store" instance="Store"/>
+			</module-slots>
+			<module-params>
+				<s3-bucket>$S3_USER_IMAGE_BUCKET</s3-bucket>
+				<s3-api-key>$S3_API_KEY</s3-api-key>
+				<s3-secret-key>$S3_SECRET_KEY</s3-secret-key>
+				<path-provider-image-magick-path>$IMAGE_MAGICK_PATH</path-provider-image-magick-path>
+			</module-params>
+		</module>
+
+				
+		<module name="Resource">
+			<module-class>com.pagesociety.web.module.resource.ResourceModule</module-class>
+			<module-slots>
+				<module-slot name="store" instance="Store"/>
+				<module-slot name="resource-path-provider" instance="ResourcePathProvider"/>
+				<module-slot name="permissions-module" instance="Permissions"/>
+			</module-slots>
+			<module-params>
+				<upload-max-file-size>0</upload-max-file-size><!--  0 is unlimited. this is an optional param -->
+			</module-params>
+		</module>
+
+		<module name="Admin">
+			<module-class>se.sparkwi.web.module.AdminModule</module-class>
+			<module-slots>
+				<module-slot name="store" 		 instance="Store"/>
+				<module-slot name="user-module"  instance="User"/>
+				<module-slot name="registration-module"  instance="Registration"/>
+				<module-slot name="dashboard-module"  instance="Dashboard"/>
+			</module-slots>
+		</module>
+
+</application>
+
