@@ -4,7 +4,7 @@ Apache
 	
   * commons-codec-1.4 (http://commons.apache.org/codec/)
   * commons-fileupload-1.2.1 (http://commons.apache.org/fileupload/)
-  * commons-httpclient-3.1 (http://hc.apache.org/httpclient-3.x/)
+  * commons-httpclient-3.1 (http://hc.apache.org/)
   * commons-io-1.2 (http://commons.apache.org/io/)
   * commons-logging-1.1.1(http://commons.apache.org/logging/)
   * poi-3.2 (http://poi.apache.org/)
