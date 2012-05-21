@@ -46,9 +46,7 @@ public class AdminModule extends WebStoreModule
 	@Export
 	public PagingQueryResult GetInfo(UserApplicationContext uctx) throws PersistenceException, WebApplicationException
 	{
-		Entity u = (Entity)uctx.getUser();
-		List<Integer>roles = (List<Integer>)u.getAttribute(UserModule.FIELD_ROLES);
-		if (!roles.contains(UserModule.USER_ROLE_WHEEL))
+		if (!isAdmin(uctx))
 			throw new WebApplicationException("NONO");
 		PagingQueryResult r = user_module.getUsersByRole(UserModule.USER_ROLE_SYSTEM_USER, 0, 1000, FIELD_DATE_CREATED);
 		for (Entity user : r.getEntities())
@@ -63,5 +61,17 @@ public class AdminModule extends WebStoreModule
 				user.setAttribute("info", reg_module.getProps(info));
 		}
 		return r;
+	}
+	
+	public static boolean isAdmin(UserApplicationContext uctx)
+	{
+		return isAdmin( (Entity)uctx.getUser() );
+	}
+	
+	public static boolean isAdmin(Entity u)
+	{
+		@SuppressWarnings("unchecked")
+		List<Integer>roles = (List<Integer>)u.getAttribute(UserModule.FIELD_ROLES);
+		return roles.contains(UserModule.USER_ROLE_WHEEL);
 	}
 }

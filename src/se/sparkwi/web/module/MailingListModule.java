@@ -57,6 +57,9 @@ public class MailingListModule extends WebStoreModule
 	@Export
 	public void Dump(UserApplicationContext uctx,RawCommunique c) throws PersistenceException,WebApplicationException
 	{
+		if (!AdminModule.isAdmin(uctx))
+			throw new WebApplicationException("NONO");
+		
 		HttpServletResponse resp = (HttpServletResponse)c.getResponse();
 		
 		Query q = new Query(MAILING_LIST_ENTITY);
