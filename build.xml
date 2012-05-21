@@ -1,152 +1,97 @@
-<project name="SparkwiseServer" basedir="." default="clean">
+<project name="Sparkwise" basedir="." default="clean">
 
 	<target name="clean">
 		<delete dir="sparkwise-db" includes="**/*" includeemptydirs="true" />
 	</target>
 
-	
 	<!-- staging and deployment build -->
-	<property name="war.production" value="ROOT.war"/>
-	<property name="war.staging" value="STAGING.war"/>
-	<property name="application.jar" value="se_sparkwi.jar"/>
-	<property name="web.lib" value="/usr/share/tomcat6/lib"/>
+	<property name="war.production" value="ROOT.war" />
+	<property name="war.staging" value="STAGING.war" />
+	<property name="application.jar" value="se_sparkwi.jar" />
+	<property name="web.lib" value="/usr/share/tomcat6/lib" />
 
-	<property environment="env"/>
-		
-    <path id="app_required_libs">
-        <fileset dir="${web.lib}" includes="*.jar"/>
-        <fileset dir="WebContent/WEB-INF/lib/" includes="*.jar"/>
-    </path>
-	    
-	  
+	<property environment="env" />
+
+	<path id="app_required_libs">
+		<fileset dir="${web.lib}" includes="*.jar" />
+		<fileset dir="WebContent/WEB-INF/lib/" includes="*.jar" />
+	</path>
+
 	<target name="build_server">
-    	<antcall target="build_server_0">
-    	    <param name="war.name" value="${war.production}"/>
-   	   		<param name="props.file" value="WebContent/WEB-INF/config/deployment.production.properties"/>
-   	   		<param name="url.file" value="WebContent/WEB-INF/config/url-mappings-production.xml"/>
-    	</antcall>
-    </target>
-	
-    <target name="build_staging" >
-    		<antcall target="compile_js"/>
-	    	<antcall target="build_server_0">
-	    	    <param name="war.name" value="${war.staging}"/>
-	   	   		<param name="props.file" value="WebContent/WEB-INF/config/deployment.staging.properties"/>
-	   	   		<param name="url.file" value="WebContent/WEB-INF/config/url-mappings-staging.xml"/>
-	    	</antcall>
+		<antcall target="build_server_0">
+			<param name="war.name" value="${war.production}" />
+			<param name="props.file" value="WebContent/WEB-INF/config/deployment.production.properties" />
+			<param name="url.file" value="WebContent/WEB-INF/config/url-mappings-production.xml" />
+		</antcall>
 	</target>
 
+	<target name="build_staging">
+		<antcall target="compile_js" />
+		<antcall target="build_server_0">
+			<param name="war.name" value="${war.staging}" />
+			<param name="props.file" value="WebContent/WEB-INF/config/deployment.staging.properties" />
+			<param name="url.file" value="WebContent/WEB-INF/config/url-mappings-staging.xml" />
+		</antcall>
+	</target>
 
-	    	
-    <target name="build_server_0">
-        <echo message="javac"/>
-		
-        <mkdir dir="__build_dir"/>
-        <mkdir dir="__jar_dir"/>
-        <mkdir dir="__web_dir"/>
-    	
-        <echo message="copying application"/>
-    	<copy todir="__web_dir">
-	    	<fileset dir="WebContent">
-	    		<exclude name="META-INF/**"/>
-	    		<exclude name="resources/**"/>
-	    		<exclude name="generated-pdfs/**"/>
-                <exclude name="**/web.xml"/>
-            	<exclude name="**/deployment**"/>
-            	<exclude name="**/url-mappings**"/>
-            	<exclude name="**/stresstest.fhtml"/>
-                <exclude name="**/ModuleTester.swf"/>
-    		</fileset>
-	    </copy>
-    	
-        <echo message="setting deployment properties and url mappings"/>
-    	<copy file="${props.file}" tofile="__web_dir/WEB-INF/config/deployment.properties"/>
-    	<copy file="${url.file}" tofile="__web_dir/WEB-INF/config/url-mappings.xml"/>
-    	
-        <echo message="compiling application"/>
-        <javac srcdir="src" destdir="__build_dir"
-         	nowarn="on" debug="on" classpathref="app_required_libs" target="1.5"/>
-        <jar destfile="__jar_dir/${application.jar}"  basedir="__build_dir"/> 
+	<target name="build_server_0">
+		<echo message="javac" />
 
-        <echo message="creating ${war.name}"/>
-        <war destfile="${war.name}" webxml="WebContent/WEB-INF/web.xml">
-            <fileset dir="__web_dir"/>
-		    <lib dir="__jar_dir"/>
-            <lib dir="WebContent/WEB-INF/lib"/>
-    	<!--	<lib file="${ps_persistence_jar}" /> -->
-    	<!--	<lib file="${ps_web_jar}" /> -->
-        </war>
-    	
-        <delete dir="__build_dir"/>
-        <delete dir="__jar_dir"/>
-        <delete dir="__web_dir"/>
-    	
-        <echo message="${war.name} complete"/>
-        
-    </target>
-	
-	<!-- begin local build. this build ps web and ps persistence and puts them in the project -->
-	<property name="ps_web_local_jar" value="WebContent/WEB-INF/lib/ps_web.jar" />
-	<property name="ps_persistence_local_jar" value="WebContent/WEB-INF/lib/ps_persistence.jar" />
-    <property name="web_local.lib" value="/Applications/apache-tomcat-6.0.26/lib"/>
-	
-		<path id="pspersistence_local_required_libs">
-		  <fileset file="../PSPersistence/ps_db.jar" />
-		  <fileset file="../PSPersistence/log4j-1.2.9.jar" />
-		  <fileset file="../PSPersistence/antlr-3.1b2.jar" />
-		  <fileset file="../PSPersistence/antlr-runtime-3.1b2.jar" />
-		</path>
+		<mkdir dir="__build_dir" />
+		<mkdir dir="__jar_dir" />
+		<mkdir dir="__web_dir" />
 
-	
-		<path id="psweb_local_required_libs">
-			<fileset dir="${web_local.lib}" includes="*.jar" />
-			<fileset dir="/Users/posttool/Documents/github/PSWebV1.0/WebContent/WEB-INF/lib/" includes="*.jar"/>
-			<fileset file="${ps_persistence_local_jar}" />
-	 	</path>
-		
-	    <target name="build_local_jars" >
-			<echo message="javac" />
-			<mkdir dir="__build_dir" />
-			<javac srcdir="/Users/posttool/Documents/github/PSPersistenceV1.0/src" destdir="__build_dir" nowarn="on" debug="on" classpathref="pspersistence_local_required_libs" target="1.5" >
-				<exclude name="com/pagesociety/test/**"/>
-			</javac>
+		<echo message="copying application" />
+		<copy todir="__web_dir">
+			<fileset dir="WebContent">
+				<exclude name="META-INF/**" />
+				<exclude name="resources/**" />
+				<exclude name="generated-pdfs/**" />
+				<exclude name="**/web.xml" />
+				<exclude name="**/deployment**" />
+				<exclude name="**/url-mappings**" />
+				<exclude name="**/stresstest.fhtml" />
+				<exclude name="**/ModuleTester.swf" />
+			</fileset>
+		</copy>
 
-			<echo message="jar ps_persistence.jar" />
-			<jar destfile="${ps_persistence_local_jar}">
-				<fileset dir="__build_dir" />
-			</jar>
-			<delete dir="__build_dir" />
-	    	
-	    	
-		    <echo message="javac" />
-		    <mkdir dir="__build_dir" />
-	 	    <javac srcdir="/Users/posttool/Documents/github/PSWebV1.0/src" destdir="__build_dir" 
-				nowarn="on" debug="on" classpathref="psweb_local_required_libs" target="1.5"/>
-			
-		    <echo message="jar ps_web.jar" />
-		    <jar destfile="${ps_web_local_jar}">
-			   <fileset dir="__build_dir" />
-		    </jar>
-		    <delete dir="__build_dir" />
-	    	
-	    	
-	    </target>
-	
-	
+		<echo message="setting deployment properties and url mappings" />
+		<copy file="${props.file}" tofile="__web_dir/WEB-INF/config/deployment.properties" />
+		<copy file="${url.file}" tofile="__web_dir/WEB-INF/config/url-mappings.xml" />
+
+		<echo message="compiling application" />
+		<javac srcdir="src" destdir="__build_dir" nowarn="on" debug="on" classpathref="app_required_libs" target="1.5" />
+		<jar destfile="__jar_dir/${application.jar}" basedir="__build_dir" />
+
+		<echo message="creating ${war.name}" />
+		<war destfile="${war.name}" webxml="WebContent/WEB-INF/web.xml">
+			<fileset dir="__web_dir" />
+			<lib dir="__jar_dir" />
+			<lib dir="WebContent/WEB-INF/lib" />
+		</war>
+
+		<delete dir="__build_dir" />
+		<delete dir="__jar_dir" />
+		<delete dir="__web_dir" />
+
+		<echo message="${war.name} complete" />
+
+	</target>
+
 	<!-- "compile" js -->
 	<target name="compile_js">
-		<property name="version" value="0"/>
-		<property name="js_src" location="WebContent/static/js/"/>
-		<property name="js_bp" location="${js_src}/-/${version}"/>
+		<property name="version" value="0" />
+		<property name="js_src" location="WebContent/static/js/" />
+		<property name="js_bp" location="${js_src}/-/${version}" />
 
-		<echo message="about to create ${js_bp}"/>
-		<mkdir dir="${js_bp}"/>
-		
+		<echo message="about to create ${js_bp}" />
+		<mkdir dir="${js_bp}" />
+
 		<exec dir="." executable="java" failonerror="true">
 			<arg line="-classpath compiler.jar" />
 			<arg line="com.google.javascript.jscomp.CommandLineRunner" />
 			<arg line="--compilation_level SIMPLE_OPTIMIZATIONS" />
-	
+
 			<arg line="--js ${js_src}/se_sparkwi.js" />
 			<arg line="--js ${js_src}/se_sparkwi_dashboard_cell.js" />
 			<arg line="--js ${js_src}/se_sparkwi_dashboard_controller.js" />
@@ -157,7 +102,7 @@
 			<arg line="--js ${js_src}/se_sparkwi_widget_config_mixins.js" />
 			<arg line="--js ${js_src}/se_sparkwi_widget_config.js" />
 			<arg line="--js ${js_src}/se_sparkwi_widget_util.js" />
-	
+
 			<arg line="--js ${js_src}/se_sparkwi_widget_viz_util_feed.js" />
 			<arg line="--js ${js_src}/se_sparkwi_widget_viz_util_graph.js" />
 			<arg line="--js ${js_src}/se_sparkwi_widget_viz_util_map.js" />
@@ -168,52 +113,99 @@
 			<arg line="--js ${js_src}/se_sparkwi_widget_viz_util_total.js" />
 			<arg line="--js ${js_src}/se_sparkwi_widget_viz_util.js" />
 			<arg line="--js ${js_src}/se_sparkwi_widget_viz.js" />
-	
+
 			<arg line="--js ${js_src}/sparkwise_date.js" />
 			<arg line="--js ${js_src}/color_util.js" />
 			<arg line="--js ${js_src}/basic_ui.js" />
 			<arg line="--js ${js_src}/carousel.js" />
-	
+
 			<arg line="--js ${js_src}/account.js" />
 			<arg line="--js ${js_src}/connections.js" />
 			<arg line="--js ${js_src}/events.js" />
 			<arg line="--js ${js_src}/feedback.js" />
 			<arg line="--js ${js_src}/footer.js" />
 			<arg line="--js ${js_src}/registration.js" />
-	
+
 			<arg line="--js_output_file ${js_bp}/board.js" />
 		</exec>
-
-
 
 		<exec dir="." executable="java" failonerror="true">
 			<arg line="-classpath compiler.jar" />
 			<arg line="com.google.javascript.jscomp.CommandLineRunner" />
 			<arg line="--compilation_level SIMPLE_OPTIMIZATIONS" />
-	
-		    <arg line="--js ${js_src}/se_sparkwi.js" />
-		    <arg line="--js ${js_src}/color_util.js" />
-		    <arg line="--js ${js_src}/basic_ui.js" />
-		    <arg line="--js ${js_src}/sparkwise_date.js" />
-		    <arg line="--js ${js_src}/events.js" />
-		    <arg line="--js ${js_src}/se_sparkwi_dashboard_public.js" />
-		    <arg line="--js ${js_src}/widget_embed.js" />
-		    <arg line="--js ${js_src}/se_sparkwi_dashboard_cell.js" />
-		    <arg line="--js ${js_src}/se_sparkwi_widget_util.js" />
-		    <arg line="--js ${js_src}/se_sparkwi_widget_viz_util_graph.js" />
-		    <arg line="--js ${js_src}/se_sparkwi_widget_viz_util_map.js" />
-		    <arg line="--js ${js_src}/se_sparkwi_widget_viz_util_percent_change.js" />
-		    <arg line="--js ${js_src}/se_sparkwi_widget_viz_util_percent_complete.js" />
-		    <arg line="--js ${js_src}/se_sparkwi_widget_viz_util_pie.js" />
-		    <arg line="--js ${js_src}/se_sparkwi_widget_viz_util_total.js" />
-		    <arg line="--js ${js_src}/se_sparkwi_widget_viz_util_feed.js" />
-		    <arg line="--js ${js_src}/se_sparkwi_widget_viz_util_slideshow.js" />
-		    <arg line="--js ${js_src}/se_sparkwi_widget_viz_util.js" />
-		    <arg line="--js ${js_src}/se_sparkwi_widget_viz.js" />
+
+			<arg line="--js ${js_src}/se_sparkwi.js" />
+			<arg line="--js ${js_src}/color_util.js" />
+			<arg line="--js ${js_src}/basic_ui.js" />
+			<arg line="--js ${js_src}/sparkwise_date.js" />
+			<arg line="--js ${js_src}/events.js" />
+			<arg line="--js ${js_src}/se_sparkwi_dashboard_public.js" />
+			<arg line="--js ${js_src}/widget_embed.js" />
+			<arg line="--js ${js_src}/se_sparkwi_dashboard_cell.js" />
+			<arg line="--js ${js_src}/se_sparkwi_widget_util.js" />
+			<arg line="--js ${js_src}/se_sparkwi_widget_viz_util_graph.js" />
+			<arg line="--js ${js_src}/se_sparkwi_widget_viz_util_map.js" />
+			<arg line="--js ${js_src}/se_sparkwi_widget_viz_util_percent_change.js" />
+			<arg line="--js ${js_src}/se_sparkwi_widget_viz_util_percent_complete.js" />
+			<arg line="--js ${js_src}/se_sparkwi_widget_viz_util_pie.js" />
+			<arg line="--js ${js_src}/se_sparkwi_widget_viz_util_total.js" />
+			<arg line="--js ${js_src}/se_sparkwi_widget_viz_util_feed.js" />
+			<arg line="--js ${js_src}/se_sparkwi_widget_viz_util_slideshow.js" />
+			<arg line="--js ${js_src}/se_sparkwi_widget_viz_util.js" />
+			<arg line="--js ${js_src}/se_sparkwi_widget_viz.js" />
 			<arg line="--js ${js_src}/footer.js" />
-			
+
 			<arg line="--js_output_file ${js_bp}/public.js" />
 		</exec>
-</target>
+	</target>
+
+	
+	
+	<!-- begin local build of ps libraries. 
+	this build ps web and ps persistence and puts them in the project.
+	it is not required as the latest jars are generally checked in
+	with the project. 
+	-->
+		<property name="ps_web_local_jar" value="WebContent/WEB-INF/lib/ps_web.jar" />
+		<property name="ps_persistence_local_jar" value="WebContent/WEB-INF/lib/ps_persistence.jar" />
+		<property name="web_local.lib" value="/Applications/apache-tomcat-6.0.26/lib" />
+
+		<path id="pspersistence_local_required_libs">
+			<fileset file="../PSPersistence/ps_db.jar" />
+			<fileset file="../PSPersistence/log4j-1.2.9.jar" />
+			<fileset file="../PSPersistence/antlr-3.1b2.jar" />
+			<fileset file="../PSPersistence/antlr-runtime-3.1b2.jar" />
+		</path>
+
+		<path id="psweb_local_required_libs">
+			<fileset dir="${web_local.lib}" includes="*.jar" />
+			<fileset dir="/Users/posttool/Documents/github/PSWebV1.0/WebContent/WEB-INF/lib/" includes="*.jar" />
+			<fileset file="${ps_persistence_local_jar}" />
+		</path>
+
+		<target name="build_ps_jars">
+			<echo message="javac" />
+			<mkdir dir="__build_dir" />
+			<javac srcdir="/Users/posttool/Documents/github/PSPersistenceV1.0/src" destdir="__build_dir" nowarn="on" debug="on" classpathref="pspersistence_local_required_libs" target="1.5">
+				<exclude name="com/pagesociety/test/**" />
+			</javac>
+
+			<echo message="jar ps_persistence.jar" />
+			<jar destfile="${ps_persistence_local_jar}">
+				<fileset dir="__build_dir" />
+			</jar>
+			<delete dir="__build_dir" />
+
+
+			<echo message="javac" />
+			<mkdir dir="__build_dir" />
+			<javac srcdir="/Users/posttool/Documents/github/PSWebV1.0/src" destdir="__build_dir" nowarn="on" debug="on" classpathref="psweb_local_required_libs" target="1.5" />
+
+			<echo message="jar ps_web.jar" />
+			<jar destfile="${ps_web_local_jar}">
+				<fileset dir="__build_dir" />
+			</jar>
+			<delete dir="__build_dir" />
+		</target>
 	
 </project>
