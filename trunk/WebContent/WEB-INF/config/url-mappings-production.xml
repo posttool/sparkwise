@@ -1,15 +1,15 @@
 <url-mappings>
 	
 	<url-mapping name="dashboard" secure="false">
-		<url>https?://mydevmachi.ne/dashboard</url>
+		<url>https?://myserve.er/dashboard</url>
 		<template-path>/tool/dashboard.fhtml</template-path>
 	</url-mapping>
 	<url-mapping name="public dashboard" secure="false">
-		<url>https?://mydevmachi.ne/b/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})?(\?.*)?</url>
+		<url>https?://myserve.er/b/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})?(\?.*)?</url>
 		<template-path>/tool/dashboard-published.fhtml?uuid=$3&amp;$4</template-path>
 	</url-mapping>
 	<url-mapping name="widget-embed" secure="false">
-		<url>https?://mydevmachi.ne/w/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})</url>
+		<url>https?://myserve.er/w/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})</url>
 		<template-path>/tool/widget-embed.fhtml?uuid=$3</template-path>
 	</url-mapping>
 
