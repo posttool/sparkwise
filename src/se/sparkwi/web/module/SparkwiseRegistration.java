@@ -18,7 +18,6 @@
  ******************************************************************************/
 package se.sparkwi.web.module;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.pagesociety.persistence.Entity;
@@ -58,13 +57,6 @@ public class SparkwiseRegistration extends RegistrationModule
 		DEFINE_SLOT(SLOT_MAILING_LIST_MODULE,MailingListModule.class,true);
 	}
 
-	public static String[] REG_NOT = new String[]{
-		"gbrink@tomorrowpartners.com",
-		"wlevy@tomorrowpartners.com",
-		"ndestandau@tomorrowpartners.com",
-		"ralyassini@tomorrowpartners.com",
-		"cbender@tomorrowpartners.com"
-	};
 	
 	@Export
 	@TransactionProtect
@@ -74,9 +66,9 @@ public class SparkwiseRegistration extends RegistrationModule
 		UpdateUserInfo(uctx,extra_props);
 		extra_props.remove("txt_password");
 		extra_props.remove("txt_confirm_password");
-		Map<String,Object> data = new HashMap<String,Object>();
-		data.put("info",extra_props);
-		email_module.sendEmail("support@sparkwi.se", REG_NOT, "Sparkwise Registration #"+user.getId(), "faq.fm", data);
+//		Map<String,Object> data = new HashMap<String,Object>();
+//		data.put("info",extra_props);
+//		email_module.sendEmail("support@sparkwi.se", REG_NOTIFICATION_LIST, "Sparkwise Registration #"+user.getId(), "faq.fm", data);
 		return user;
 	}
 	
