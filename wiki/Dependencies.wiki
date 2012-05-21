@@ -19,7 +19,7 @@ Page Society / Post Tool (Apache 2)
 
 Oracle
 
-  * db.jar (http://www.oracle.com/technetwork/database/berkeleydb/downloads/oslicense-093458.html)
+  * db.jar (http://www.oracle.com/technetwork/database/berkeleydb/)
 	
 Others
 
