@@ -33,6 +33,7 @@ along with Sparkwise.  If not, see <http://www.gnu.org/licenses/>.
 	</path>
 
 	<target name="build_server">
+		<antcall target="compile_js"/>
 		<antcall target="build_server_0">
 			<param name="war.name" value="${war.production}" />
 			<param name="props.file" value="WebContent/WEB-INF/config/deployment.production.properties" />
