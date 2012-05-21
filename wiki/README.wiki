@@ -17,6 +17,8 @@ The following configuration will work for Debian/Ubuntu:
 # apt-get install imagemagick
 }}}
 
+Use Ant (build.xml) to create a deployable WAR file. Make sure to set up deployment.properties
+with appropriate deployment values. S3 is used by default to host images for Upload widget. This 
+can be replaced with the local file system if S3 is not an option.
 
-Contact David Karam
-dkaram@sparkwi.se
+Contact David Karam dkaram@sparkwi.se for more information.
