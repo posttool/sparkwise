@@ -10,7 +10,7 @@ Dashboard
 	name : String
 	description : String
 	tags : String[]
-	public : boolean
+	is_public : boolean
 	public_name : String
 	public_org : String
 	uuid : String
@@ -24,6 +24,7 @@ WidgetInstance
 	rect : int[]
 	display_props : Map
 	children : WidgetDataProxy[]
+	is_public : boolean
 	uuid : String
 
 Widget (Definition)
@@ -35,7 +36,7 @@ WidgetDataProxy
 	parent : Project
 	widget : Widget
 	connection : Connection
-	state : enum()
+	state : enum(init, requiresAuth, requiresServiceSelection, ok, error)
 	selector_values : Map
 	selector_display_values : Map
 	props : Map
