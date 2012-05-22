@@ -2,11 +2,11 @@
 Project
 	name : String
 	uuid : String
-	dashboards* : Dashboard[]
+	dashboards : Dashboard[]
 
 Dashboard
 	parent : Project
-	widgets* : WidgetInstance[]
+	widgets : WidgetInstance[]
 	name : String
 	description : String
 	tags : String[]
