@@ -2,9 +2,11 @@
 Project
 	name : String
 	uuid : String
+	dashboards* : Dashboard[]
 
 Dashboard
 	parent : Project
+	widgets* : WidgetInstance[]
 	name : String
 	description : String
 	tags : String[]
@@ -13,21 +15,21 @@ Dashboard
 	public_org : String
 	uuid : String
 
-Widget 
-	name : String
-	description : String
-	class_name : String
-
 WidgetInstance
 	parent : Dashboard
-	type : enum()
+	proxy : WidgetDataProxy
+	type : enum(init, requiresProxy, requiresMembers, ok)
 	state : enum()
 	name : String
 	rect : int[]
 	display_props : Map
-	proxy : WidgetDataProxy
 	children : WidgetDataProxy[]
 	uuid : String
+
+Widget (Definition)
+	name : String
+	description : String
+	class_name : String
 
 WidgetDataProxy
 	parent : Project
@@ -47,6 +49,11 @@ WidgetData
 	field_data : Map
 	error_code : String
 	error_message : String
+
+Connection
+	type : String
+	token : String
+	scopes : String
 
 MySet
 	widgets : WidgetInstance[]
