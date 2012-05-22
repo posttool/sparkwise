@@ -27,10 +27,8 @@ Oracle
 	
 Others
 
-  * closure (Apache2 http://code.google.com/p/closure-compiler/)
   * freemarker (BSD style http://freemarker.org/docs/app_license.html)
   * gson (Apache2 http://code.google.com/p/google-gson/)
   * jdring (LGPL http://www.jtheory.com/jdring.html)
   * javax.mail (CDDL-1.0, BSD, GPL-2.0, GNU-Classpath http://kenai.com/projects/javamail)
   * uuid (MIT http://johannburkard.de/software/uuid/)
-
