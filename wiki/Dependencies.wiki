@@ -34,18 +34,3 @@ Others
   * javax.mail (CDDL-1.0, BSD, GPL-2.0, GNU-Classpath http://kenai.com/projects/javamail)
   * uuid (MIT http://johannburkard.de/software/uuid/)
 
-
-
-The following libraries are used on the client side. The are distributed in `WebContent/static/js/lib`:
-
-  * jquery  (MIT http://jquery.com/)
-  * jquery-ui  (MIT http://jqueryui.com/)
-  * jquery.animate-enhanced (MIT https://github.com/benbarnett/jQuery-Animate-Enhanced)
-  * jquery.cookie (MIT https://github.com/carhartl/jquery-cookie)
-  * jquery.editable (MIT http://www.arashkarimzadeh.com/jquery/7-editable-jquery-plugin.html)
-  * jquery.field  (MIT http://www.pengoworks.com/workshop/jquery/field/field.plugin.htm)
-  * jquery.mousewheel (MIT http://brandonaaron.net/code/mousewheel/docs)
-  * jquery.selectbox (MIT http://www.bulgaria-web-developers.com/projects/javascript/selectbox/)
-  * jscrollpanel (MIT http://jscrollpane.kelvinluck.com/)
-  * markercluster (Apache 2 http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclusterer/)
-  * raphaeljs (MIT http://raphaeljs.com/)
