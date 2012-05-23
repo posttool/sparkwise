@@ -1,4 +1,5 @@
 #summary Setting up with third party services.
+#sidebar TableOfContents
 
 ==OAuth Keys Setup==
 
