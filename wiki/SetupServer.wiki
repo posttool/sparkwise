@@ -47,14 +47,9 @@ case $1 in
                 ant build_server
                 ;;
         deploy)
-                rm -rf   $WEB_APPS/ROOT
-                rm -f    $WEB_APPS/ROOT.war
-                mkdir    $WEB_APPS/ROOT
-                cp       $PS_HOME/checkout/$APP_NAME/ROOT.war $WEB_APPS/ROOT
-                cd       $WEB_APPS/ROOT
-                jar xf   ROOT.war
-                rm       ROOT.war
-                ln -s    $WEB_RES/resources $WEB_APPS/ROOT/resources
+                rm -rf $WEB_APPS/ROOT
+                mkdir $WEB_APPS/ROOT
+                cp $PS_HOME/checkout/$APP_NAME/ROOT.war $WEB_APPS/ROOT
                 ;;
         everything)
                 $0 checkout
@@ -75,6 +70,6 @@ esac
 
 }}}
 
-4. Before you {{{./build.sh everything}}}, make sure that your deployment properties are set to reflect these base directories too. Take a look at SetupKeys and [trunk... deployment.properties].
+4. Before you {{{./build.sh everything}}}, make sure that your deployment properties are set to reflect these base directories too. Take a look at SetupKeys and [http://code.google.com/p/sparkwise/source/browse/trunk/WebContent/WEB-INF/config/ deployment.properties].
 
 5. Now, the first time you run the application, execute {{{./build.sh evolution}}}. The output from the server starting should be routed to the console. After the database is created, you will be asked to set up an admin user. After completing this step, restart the server using the normal {{{start}}} argument. If you have a problem with "running" the tomcat service with output to the console, get in touch... 
