@@ -1,0 +1,14 @@
+Getting Started
+  * creating keys with third party services
+  * how to install on development machine
+  * how to install on server
+  * running the test 
+  * how to add a data collection widget
+
+Documentation
+  * [DashboardAPI Dashboard API]
+  * [DashboardEntities Dashboard Entities]
+  * [WidgetStates Widget State Transitions]
+  * Overview of Architecture
+  * Notes on the database
+  * Notes on the state of the open source client implementation***
