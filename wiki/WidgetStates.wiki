@@ -1,3 +1,4 @@
+#sidebar TableOfContents
 {{{
 WIDGET_STATE_INIT 
 WIDGET_STATE_REQUIRES_DATA_PROXY
