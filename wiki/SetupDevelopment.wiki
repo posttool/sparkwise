@@ -1,0 +1,104 @@
+#summary Instructions for setting up a development environment on Mac OS X
+
+==Instructions for setting up a development environment on Mac OS X==
+(assumes Java 6 is installed)
+
+===Eclipse===
+
+http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/helios/SR2/eclipse-jee-helios-SR2-macosx-cocoa.tar.gz
+
+Once installed, start it up and add subversion (subclipse) with these instructions (using the update manager) http://subclipse.tigris.org/servlets/ProjectProcess?pageID=p4wYuA 
+
+===Initial Import===
+
+Restart Eclipse (as prompted) go to File > Import > SVN > Checkout project from SVN
+
+Add  the Google code repository and then checkout the project.
+
+===Tomcat===
+
+  * Download tomcat 6 (core binary) at http://tomcat.apache.org/download-60.cgi
+  * Extract it to you applications directory (or anywhere, really)
+  * Now tell Eclipse about it- go to File > New > Other > server
+  * In the wizard choose Apache Tomcat 6
+  * Next to 'server runtime environment' click 'Add'
+  * in the 'new runtime' popup, browse to the Tomcat installation 
+  * click next
+  * from 'Add and Remove', add Sparkwise to the right side
+  * click finish
+
+===BDB===
+
+Download and extract
+http://download.oracle.com/berkeley-db/db-4.7.25.tar.gz
+
+From the command line / terminal
+
+{{{
+#cd /path/to/db-4.7.25 
+#cd build_unix
+#../dist/configure --enable-java
+#make
+#make install
+}}}
+
+You also might need to tell Java about BDB
+{{{
+#ln -s /usr/lib/BerkeleyDB/lib/libdb_java..  /Library/Java/Extentions
+}}}
+
+===ImageMagick===
+
+Download
+http://www.imagemagick.org/download/binaries/ImageMagick-x86_64-apple-darwin10.6.0.tar.gz
+or http://www.imagemagick.org/script/binary-releases.php
+move the extracted directory 'ImageMagick-6.6.x' to Applications
+
+===Want to run on port 80?===
+
+{{{
+#sudo ipfw add 100 fwd 127.0.0.1,8080 tcp from any to any 80 in
+}}}
+
+
+Eclipse, WebApp Config
+
+
+back to eclipse...
+
+add environment variables to the run configurations for resizing images
+go to run > run configurations …
+click on the tomcat v6 at localhost configuration
+click the environment variables tab
+add these:
+MAGICK_HOME                 /Applications/ImageMagick-6.6.X 
+DYLD_LIBRARY_PATH     /Applications/ImageMagick-6.6.X/lib
+
+in the 'package explorer' navigate to and open
+SWAGroupServer/WebContent/WEB-INF/config/deployment.properties
+the one that is there by default needs to be modified for your user
+and your bdb environment, tomcat as well as image magick, etc.
+modify this file, but don't check it in, please. 
+if you want to check in you deployments, copy the working version
+and check it in as deployment.btatham.properties
+
+Download Database
+
+
+
+if you don't see the servers tab, go to window > show view > other > servers
+
+click the '>' (green circle with arrow) button 
+
+the console should start logging
+
+go to your browser and type
+http://swagroup-dev.com
+
+Modify Code
+
+
+navigate the WebContent directory to edit templates/css etc
+preview in your browser
+right/cntrl click on file, go to team > commit
+add a comment about what you did...
