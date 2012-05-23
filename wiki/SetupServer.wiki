@@ -1,0 +1,80 @@
+#summary How to set up quickly on Debian or similar Linux....
+#labels Phase-Deploy
+
+
+Here is a basic install procedure. Many of the details are up to your configuration requirements...
+
+1. Install the required software:
+
+{{{
+#java,tomcat,ant
+apt-get install openjdk-6-jdk
+apt-get install tomcat6
+apt-get install ant
+
+#bdb with java bindings
+apt-get install libdb4.7-java
+
+#svn, imagemagick
+apt-get install subversion
+apt-get install imagemagick
+}}}
+
+2. Create a root directory for the application, say {{{/home/sparkwise}}}
+
+3. Create a shell script to checkout, build and deploy the application. Something like the following as {{{/home/sparkwise/build.sh}}}:
+
+{{{
+APP_NAME=SparkwiseServer
+APP_HOME=/home/sparkwise
+WEB_RES=$APP_HOME
+WEB_APPS=/var/lib/tomcat6/webapps
+SVN_ROOT=https://sparkwise.googlecode.com/svn/trunk/  #your fork of the project
+TOMCAT_SERVICE="/etc/init.d/tomcat6"
+
+mkdir -p $APP_HOME/checkout
+mkdir -p $WEB_RES
+mkdir -p $WEB_RES/resources
+
+case $1 in
+
+        checkout)
+                cd $APP_HOME/checkout
+                svn checkout $SVN_ROOT/$APP_NAME
+                ;;
+        build)
+                cd $PS_HOME/checkout/$APP_NAME
+                ant build_server
+                ;;
+        deploy)
+                rm -rf   $WEB_APPS/ROOT
+                rm -f    $WEB_APPS/ROOT.war
+                mkdir    $WEB_APPS/ROOT
+                cp       $PS_HOME/checkout/$APP_NAME/ROOT.war $WEB_APPS/ROOT
+                cd       $WEB_APPS/ROOT
+                jar xf   ROOT.war
+                rm       ROOT.war
+                ln -s    $WEB_RES/resources $WEB_APPS/ROOT/resources
+                ;;
+        everything)
+                $0 checkout
+                $0 build
+                $TOMCAT_SERVICE stop
+                $0 deploy
+                $TOMCAT_SERVICE start
+                ;;
+
+        evolution)
+                $0 checkout
+                $0 build
+                $TOMCAT_SERVICE stop
+                $0 deploy
+                $TOMCAT_SERVICE run
+                ;;
+esac
+
+}}}
+
+4. Before you {{{./build.sh everything}}}, make sure that your deployment properties are set to reflect these base directories too. Take a look at SetupKeys and [trunk... deployment.properties].
+
+5. Now, the first time you run the application, execute {{{./build.sh evolution}}}. The output from the server starting should be routed to the console. After the database is created, you will be asked to set up an admin user. After completing this step, restart the server using the normal {{{start}}} argument. If you have a problem with "running" the tomcat service with output to the console, get in touch... 
