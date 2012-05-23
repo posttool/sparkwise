@@ -61,44 +61,20 @@ move the extracted directory 'ImageMagick-6.6.x' to Applications
 }}}
 
 
-Eclipse, WebApp Config
+==More Eclipse info===
 
-
-back to eclipse...
-
-add environment variables to the run configurations for resizing images
+Add environment variables to the run configurations for resizing images
 go to run > run configurations …
 click on the tomcat v6 at localhost configuration
 click the environment variables tab
 add these:
-MAGICK_HOME                 /Applications/ImageMagick-6.6.X 
+MAGICK_HOME               /Applications/ImageMagick-6.6.X 
 DYLD_LIBRARY_PATH     /Applications/ImageMagick-6.6.X/lib
 
+===Deployment Properties===
+
 in the 'package explorer' navigate to and open
-SWAGroupServer/WebContent/WEB-INF/config/deployment.properties
+Sparkwise/WebContent/WEB-INF/config/deployment.properties
 the one that is there by default needs to be modified for your user
 and your bdb environment, tomcat as well as image magick, etc.
-modify this file, but don't check it in, please. 
-if you want to check in you deployments, copy the working version
-and check it in as deployment.btatham.properties
-
-Download Database
-
-
-
-if you don't see the servers tab, go to window > show view > other > servers
-
-click the '>' (green circle with arrow) button 
-
-the console should start logging
-
-go to your browser and type
-http://swagroup-dev.com
-
-Modify Code
-
-
-navigate the WebContent directory to edit templates/css etc
-preview in your browser
-right/cntrl click on file, go to team > commit
-add a comment about what you did...
+modify this file.
