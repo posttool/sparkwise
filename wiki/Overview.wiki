@@ -1,25 +1,7 @@
-#summary The introduction and table of contents for SparkwiseOS.
 #sidebar TableOfContents
 
 = Introduction =
 
-Add your content here.
+SparkwiseOS is the open source code used to run the online free service http://sparkwi.se
 
-
-= Details =
-
-
-Getting Started
-  * creating keys with third party services
-  * how to install on development machine
-  * how to install on server
-  * running the test 
-  * how to add a data collection widget
-
-Documentation
-  * [DashboardAPI Dashboard API]
-  * [DashboardEntities Dashboard Entities]
-  * [WidgetStates Widget State Transitions]
-  * Overview of Architecture
-  * Notes on the database
-  * Notes on the state of the open source client implementation***
+It can be set up and run on any Linux, Windows or Mac OS X machine in a development mode and production mode. 
