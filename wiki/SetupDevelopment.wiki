@@ -74,7 +74,7 @@ DYLD_LIBRARY_PATH     /Applications/ImageMagick-6.6.X/lib
 ===Deployment Properties===
 
 in the 'package explorer' navigate to and open
-Sparkwise/WebContent/WEB-INF/config/deployment.properties
+[http://code.google.com/p/sparkwise/source/browse/trunk/WebContent/WEB-INF/config/deployment.properties deployment.properties]
 the one that is there by default needs to be modified for your user
 and your bdb environment, tomcat as well as image magick, etc.
 modify this file.
