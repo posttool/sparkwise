@@ -4,7 +4,7 @@
 
 ==OAuth Keys Setup==
 
-In order for one to set up the application we need keys for all the third party data providers we are integrating with.  This document is provides URLs to produce keys for the Sparkwise application. 
+Sparkwise integrates with many OAuth enabled data sources. It provides a mechanism to authenticate with these sources on a users and gather data on their behalf. In order to provide this mechanism, the application developer must register with each of the sources. The sources will provide an application key as well as other "tokens" that must be added to a configuration file.
 
 In all cases, once your application has been registered, the keys can be copied to your application [http://code.google.com/p/sparkwise/source/browse/trunk/WebContent/WEB-INF/config/ deployment.properties]
 
