@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary The introduction and table of contents for SparkwiseOS.
 
 = Introduction =
 
@@ -15,9 +15,9 @@ Getting Started
   * how to add a data collection widget
 
 Documentation
-  * Dashboard API
-  * Entity Diagram
-  * Widget State Diagram
+  * [DashboardAPI Dashboard API]
+  * [DashboardEntities Dashboard Entities]
+  * [WidgetStates Widget State Transitions]
   * Overview of Architecture
   * Notes on the database
   * Notes on the state of the open source client implementation***
