@@ -50,8 +50,7 @@ You also might need to tell Java about BDB
 ===ImageMagick===
 
 Download
-http://www.imagemagick.org/download/binaries/ImageMagick-x86_64-apple-darwin10.6.0.tar.gz
-or http://www.imagemagick.org/script/binary-releases.php
+http://www.imagemagick.org/script/binary-releases.php#macosx
 move the extracted directory 'ImageMagick-6.6.x' to Applications
 
 ===Want to run on port 80?===
