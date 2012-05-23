@@ -1,4 +1,5 @@
 #summary Instructions for setting up a development environment on Mac OS X
+#labels Phase-Deploy
 
 ==Instructions for setting up a development environment on Mac OS X==
 (assumes Java 6 is installed)
