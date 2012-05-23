@@ -1,0 +1,23 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+
+Add your content here.
+
+
+= Details =
+
+Getting Started
+  * creating keys with third party services
+  * how to install on development machine
+  * how to install on server
+  * running the test 
+  * how to add a data collection widget
+
+Documentation
+  * Dashboard API
+  * Entity Diagram
+  * Widget State Diagram
+  * Overview of Architecture
+  * Notes on the database
+  * Notes on the state of the open source client implementation***
