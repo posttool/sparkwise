@@ -1,0 +1,44 @@
+#summary Setting up with third party services.
+
+==OAuth Keys Setup==
+
+In order for one to set up the application we need keys for all the third party data providers we are integrating with.  This document is provides URLs to produce keys for the Sparkwise application. 
+
+In all cases, once your application has been registered, the keys can be copied to your application [http://code.google.com/p/sparkwise/source/browse/trunk/WebContent/WEB-INF/config/ deployment.properties]
+
+
+===Google - a.k.a Gdata===
+
+Register your domain and verify ownership:
+https://www.google.com/accounts/ManageDomains
+  
+===YouTube Developer Key===
+
+http://code.google.com/apis/youtube/dashboard/gwt/index.html
+    
+===Twitter===
+
+https://dev.twitter.com/apps/new
+Callback URL: http://yourdomain/authorize/Twitter
+
+
+===Vimeo===
+
+http://vimeo.com/api/applications/new
+Application Callback URL: -empty-
+   	 
+===Facebook===
+
+http://developers.facebook.com/setup/
+
+Facebook is the only service in the list that requires separate keys be created for development and production. It is the only service that verifies the application domain. So generally we setup a key for Facebook on localhost for development.
+
+===Flickr===
+
+http://www.flickr.com/services/apps 
+   	 
+   	 
+   	 
+ 	 
+   	 
+    	
