@@ -1,9 +1,9 @@
 Getting Started
-  * creating keys with third party services
-  * how to install on development machine
-  * how to install on server
-  * running the test 
-  * how to add a data collection widget
+  * Creating keys with third party services
+  * How to install on development machine
+  * How to install on server
+  * Running the test 
+  * How to add a data collection widget
 
 Documentation
   * [DashboardAPI Dashboard API]
