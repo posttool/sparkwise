@@ -22,7 +22,7 @@ apt-get install imagemagick
 
 2. Create a root directory for the application, say {{{/home/sparkwise}}}
 
-3. Create a shell script to checkout, build and deploy the application. Something like the following as {{{/home/sparkwise/build.sh}}}:
+3. Create a shell script to checkout, build and deploy the application. Something like the following as {{{/home/sparkwise/build.sh}}}. Most of the actual build happens in the ant task [http://code.google.com/p/sparkwise/source/browse/trunk/build.xml  build_server].
 
 {{{
 APP_NAME=SparkwiseServer
@@ -40,7 +40,7 @@ case $1 in
                 ;;
         build)
                 cd $APP_HOME/checkout/$APP_NAME
-                ant [http://code.google.com/p/sparkwise/source/browse/trunk/build.xml build_server]
+                ant build_server
                 ;;
         deploy)
                 rm -rf $WEB_APPS/ROOT
@@ -66,6 +66,55 @@ esac
 
 }}}
 
-4. Before you {{{./build.sh everything}}}, make sure that your deployment properties are set to reflect these base directories too. Take a look at SetupKeys and [http://code.google.com/p/sparkwise/source/browse/trunk/WebContent/WEB-INF/config/ deployment.properties].
+4. Before you {{{./build.sh everything}}}, make sure that your deployment properties are set to reflect these base directories too. Take a look at SetupKeys and [http://code.google.com/p/sparkwise/source/browse/trunk/WebContent/WEB-INF/config/ deployment.properties]. In the sample below, the question marks should all be replaced with the keys you collected from the third party sites.
 
-5. Now, the first time you run the application, execute {{{./build.sh evolution}}}. The output from the server starting should be routed to the console. After the database is created, you will be asked to set up an admin user. After completing this step, restart the server using the normal {{{start}}} argument. If you have a problem with "running" the tomcat service with output to the console, get in touch... 
+{{{
+DB_ROOT_DIR                   = /home/sparkwise/sparkwise-db
+DB_BACKUP_DIR                 = /home/sparkwise/sparkwise-db-backup
+
+WEB_ROOT_DIR                  = /var/lib/tomcat6/webapps/ROOT
+RESOURCE_BASE_DIR             = /var/lib/tomcat6/webapps/ROOT/resources
+
+WEB_ROOT_URL                  = http://myserv.er
+WEB_ROOT_URL_SECURE           = https://myserv.er
+
+IMAGE_MAGICK_PATH             = /usr/bin
+
+#required to send email confirmations of registration
+SMTP_SERVER                   = smtp.mailserv.er
+SMTP_SERVER_PORT              = 465
+SMTP_SERVER_USERNAME          = sender@serv.er
+SMTP_SERVER_PASSWORD          = ?
+
+#application data root directories
+MODULE_DATA_DIRECTORY         = /home/sparkwise/checkout/sparkwise/module-data
+EMAIL_TEMPLATE_DIR            = /home/sparkwise/checkout/sparkwise/email-templates
+WIDGET_CONFIG                 = /home/sparkwise/checkout/sparkwise/config/widget.conf.json
+
+#data collection policy. -1 turns it off.
+DATA_COLLECT_HOUR             = -1
+DATA_COLLECT_MINUTE           = -1
+DATE_QUANTIZE_UNIT            = day
+DATE_QUANTIZE_RESOLUTION      = 1
+
+#oauth (and other types of) keys
+TWITTER_CONSUMER_KEY          = ?
+TWITTER_CONSUMER_SECRET_KEY   = ?
+VIMEO_CONSUMER_KEY            = ?
+VIMEO_CONSUMER_SECRET_KEY     = ?
+GDATA_CONSUMER_KEY            = ? 
+GDATA_CONSUMER_SECRET_KEY     = ? 
+YOUTUBE_DEVELOPER_KEY         = ?
+FACEBOOK_APP_ID               = ?
+FACEBOOK_SECRET_KEY           = ?
+FLICKR_CONSUMER_KEY           = ?
+FLICKR_SECRET_KEY             = ?
+BING_APP_ID                   = ?
+
+#s3 is used for storing images from the 'upload logo' widget
+S3_USER_IMAGE_BUCKET          = mys3bucket
+S3_API_KEY                    = ?
+S3_SECRET_KEY                 = ?
+}}}
+
+5. The first time you run the application, execute {{{./build.sh evolution}}}. The output from the server starting should be routed to the console. After the database is created, you will be asked to set up an admin user. After completing this step, restart the server using the normal {{{start}}} argument. If you have a problem with "running" the tomcat service with output to the console, get in touch... 
