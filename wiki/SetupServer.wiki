@@ -32,10 +32,6 @@ WEB_APPS=/var/lib/tomcat6/webapps
 SVN_ROOT=https://sparkwise.googlecode.com/svn/trunk/  #your fork of the project
 TOMCAT_SERVICE="/etc/init.d/tomcat6"
 
-mkdir -p $APP_HOME/checkout
-mkdir -p $WEB_RES
-mkdir -p $WEB_RES/resources
-
 case $1 in
 
         checkout)
@@ -43,8 +39,8 @@ case $1 in
                 svn checkout $SVN_ROOT/$APP_NAME
                 ;;
         build)
-                cd $PS_HOME/checkout/$APP_NAME
-                ant build_server
+                cd $APP_HOME/checkout/$APP_NAME
+                ant [http://code.google.com/p/sparkwise/source/browse/trunk/build.xml build_server]
                 ;;
         deploy)
                 rm -rf $WEB_APPS/ROOT
