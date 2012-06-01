@@ -1,0 +1,96 @@
+<#include '/include/sparkwise.fhtml'/>
+<#include '/include/facebook.fhtml'/>
+<@HTML_PUBLIC ''/>
+<body id="dashboard-published">
+
+<div class="dashboard-published">
+<div id="persistent-published">
+<div id="header-published">
+	<div class='wrap'>      
+  		<div id='published-info'>
+			<span id="published-info-username"></span>
+			<span id="published-info-boardname"></span>
+<#if user_context.user??>
+			<span><a href="#" id="published-info-boardname-edit">Edit</a></span>
+</#if>
+		</div>
+		
+		<div id="plublished-share-links">
+			<div class="share-to">
+				<span>Share To</span>
+				<span class="link-facebook"><a href="#">Facebook</a></span>
+				<span class="link-twitter"><a href="#">Twitter</a></span>
+				
+				<div class="clear"></div>
+			</div>
+			<div class="powered-by">
+				<span>Powered by</span>
+				<a href="http://sparkwi.se"><span class="logo">Sparkwise</span></a>
+				<div class="clear"></div>
+			</div>
+			<div class="clear"></div>
+		</div>
+  	</div>
+	<br clear='all'/>
+
+	</div>
+</div>
+</div>
+
+<div id="graph_tooltip"></div>
+<div id="content">
+	<div id="public-dashboard-wrapper">
+		<div id="grid">
+	
+		</div>
+	</div>
+</div>
+
+
+<script>
+$(document).ready(function(){
+	<@SPARKWISE_WEBFONT_SCRIPT "init" />
+	var init = function()
+	{
+		$_footer_init();
+		$_dashboard_public_init('${params.uuid}');
+	}
+});
+</script>
+
+<@FACEBOOK "${application.moduleMap['Authorization'].params['facebook-app-id']}" "${web_url}" />
+<script>
+var link = document.location.href;
+/* NOTE this is duplicated in the tool / se_sparkwi_dashboard_tabs.js */
+function get_name(){
+	if (g_board.public_org && g_board.public_name)
+		return g_board.public_org+" | "+g_board.public_name;
+	else if (g_board.public_name)
+		return g_board.public_name;
+	else if (g_board.public_org)
+		return g_board.public_org;
+	else
+		return "Sparkwise Dashboard";
+}
+$('.link-facebook').click(function(){
+	 FB.ui(
+	  {
+	    method: 'feed',
+	    name: get_name(),
+	    link: link,
+	    picture:  'http://sparkwi.se/static/image/logo_sparkwise.png',
+	    caption: 'powered by Sparkwise'
+	  },
+	  function(response) {
+	  }
+	);
+});
+$('.link-twitter').click(function(){
+	window.open("http://twitter.com/intent/tweet?url="+encodeURIComponent(link), 'tweet','width=600,height=300')
+});
+</script>
+
+</div>
+</body>
+</html>
+

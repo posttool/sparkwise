@@ -1,0 +1,39 @@
+<!DOCTYPE html> 
+<html>
+  <head> 
+    <title> 
+      Connect To Google
+    </title> 
+    <link rel="stylesheet" type="text/css" href="/static/css/pre-connect-popup.css" media="screen" />
+    <script>
+	function next()
+	{
+		window.location='${params.next}';
+	}
+
+	</script>
+  </head> 
+<body>
+
+<div id="message">
+
+<div class='pre-connect-popup'>
+	<div class='header-bar'>Connecting...</div>
+	
+	<div class='popup-text'> 
+		<p>Sparkwise will now connect to your Google account.
+		Make sure the Google account you are currently logged in to is the one you want to connect. 
+		What happens if you connect to the wrong account? No big deal. Just remove it in the Sparkwise Connections window and start over.</p>
+	
+		<a href='javascript: next();' class='standard-button'>Continue</a>
+		<a href='javascript:self.close()' class='standard-button'>Cancel</a>
+	</div>
+	<iframe src="https://www.google.com/accounts/Logout" style="width:0px;height:0px;position:absolute;left:-1000px;"/>
+</div>
+
+</div>
+ 	
+
+
+</body> 
+</html>

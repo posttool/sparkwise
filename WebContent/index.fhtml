@@ -1,0 +1,119 @@
+<#include '/include/head.fhtml'/>
+
+<@HTML
+	title="Sign in"
+	ga_tracking_code="UA-XXX-1"
+	s3bucket="my_sparkwise_uploads"
+	scripts=[
+    	"static/js/lib/jquery-1.7.1.js"
+    	"static/js/lib/jquery-1.7.1.js"
+		]
+	csses=[
+		"static/css/style.css"
+		]
+	/>
+<body>
+
+<div id="wrapper">
+<h1>Welcome to Sparkwise</h1>
+<hr/>
+
+<h2>Sign In</h2>
+<form name="frm_signin" id="frm_signin" class="sparkwise-form"  method="POST">
+	<div class="field_wrapper">
+		<div class="label">Email</div>
+		<div class="field"><input type="text" name="email" value="" /></div>
+	</div>
+	<div class="field_wrapper">
+		<div class="label">Password</div>
+		<div class="field"><input type="password" name="password" value="" /></div>
+	</div>
+	<div class="signin-error-msg"></div>
+	<div class="field_wrapper">
+		<input type="submit" name="btn_signin_submit" value="Sign In" />
+	</div>					
+</form>
+
+<hr/>
+
+<h2>Sign Up</h2>
+<form name="frm_signup" id="frm_signup" class="sparkwise-form" method="POST" >
+			
+	<div class="field_wrapper">
+		<div class="label">First Name <span>*</span></div>
+		<div class="field"><input type="text" name="txt_fname" id="txt_fname" class="tbstyle" value="" /></div>
+		<div class="err_msg">Please enter your first name.</div>
+	</div>
+	
+	<div class="field_wrapper">
+		<div class="label">Last Name <span>*</span></div>
+		<div class="field"><input type="text" name="txt_lname" id="txt_lname" class="tbstyle" value="" /></div>
+		<div class="err_msg">Please enter your last name.</div>
+	</div>
+	
+	<div class="field_wrapper">
+		<div class="label">Email <span>*</span></div>
+		<div class="field"><input type="text" name="txt_email" id="txt_email" class="tbstyle" value="" /></div>
+		<div class="err_msg">Please enter your valid email id.</div>
+	</div>
+	
+	<div class="field_wrapper">
+		<div class="label">Username <span>*</span></div>
+		<div class="field"><input type="text" name="txt_username" id="txt_username" class="tbstyle" value="" /></div>
+		<div class="err_msg">Please enter your username.</div>
+	</div>
+	
+	<div class="field_wrapper">
+		<div class="label">Password <span>*</span></div>
+		<div class="field"><input type="password" name="txt_password" id="txt_password" class="tbstyle" value="" /></div>
+		<div class="err_msg">Please enter your password.</div>
+	</div>	
+	
+	<div class="field_wrapper">
+		<div class="label">Confirm Password <span>*</span></div>
+		<div class="field"><input type="password" name="txt_confirm_password" id="txt_confirm_password" class="tbstyle" value="" /></div>
+		<div class="err_msg">Please confirm your password.</div>
+	</div>
+
+	<div class="field_wrapper">
+		<div class="field">
+			<input type="submit" name="btn_signup" id="btn_signup" class="image_button btn_signup" value="Sign Up" />
+		</div>
+	</div>
+</form>
+</div>
+
+<script type="text/javascript" src="static/js/lib/ps_client_network.js"></script>
+<script>com_pagesociety_web_ModuleRequest.SERVICE_URL = "${web_url}";</script>
+
+<script>
+
+$(function(){
+	function to_map($f)
+	{
+		var s = $f.serializeArray();
+		var m = {};
+		for (var i=0; i<s.length; i++)
+			m[s[i].name] = s[i].value
+		return m;
+	}
+	
+	$('#frm_signin').submit(function(e)
+	{
+		e.preventDefault();
+		var m = to_map($('#frm_signin'));
+		com_pagesociety_web_ModuleConnection.doModule('User/Login', [m.email, m.password, false], 
+				function(a){
+				location.href = "dashboard";
+				},
+				function(e){
+					alert(e.message);
+				});
+		return false;
+	});
+});
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<#attempt>
+
+<#if params.activation_token??>
+	<#assign result = application.execute(user_context, "Registration/ActivateUserAccount", [ params.activation_token]) />
+	<script>window.location = '${web_url}/dashboard'</script>
+<#else>
+No activation token to activate.
+</#if>
+
+<#recover>
+Your account has been activated. View your <a href="/dashboard">dashboard</a>.
+<!-- ${.error} -->
+</#recover>
