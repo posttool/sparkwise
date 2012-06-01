@@ -13,8 +13,10 @@ In all cases, once your application has been registered, the keys can be copied 
 
 Register your domain and verify ownership:
 https://www.google.com/accounts/ManageDomains
+
+Once the domain is verified, you can get your keys by clicking *Manage domain* at the bottom of the page. Make sure the "Target URL path prefix" shows your domain name. If not, add it and *Save*.
   
-===YouTube Developer Key===
+===You Tube Developer Key===
 
 http://code.google.com/apis/youtube/dashboard/gwt/index.html
     
