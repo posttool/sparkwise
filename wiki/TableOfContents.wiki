@@ -8,4 +8,6 @@
    * [DashboardEntities Dashboard Entities]
    * [WidgetStates Widget State Transitions]
    * How to add a data collection widget
+     * Server Side
+     * Client Side
    * Notes on the database
