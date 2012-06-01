@@ -1,4 +1,4 @@
-#summary Instructions for setting up a development environment on Mac OS X
+#summary Instructions for setting up a development environment on Mac OS X (mostly the same for Windows)
 #labels Phase-Deploy
 
 ==Instructions for setting up a development environment on Mac OS X==
@@ -6,7 +6,7 @@
 
 ===Eclipse===
 
-http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/helios/SR2/eclipse-jee-helios-SR2-macosx-cocoa.tar.gz
+http://www.eclipse.org/downloads
 
 Once installed, start it up and add subversion (subclipse) with these instructions (using the update manager) http://subclipse.tigris.org/servlets/ProjectProcess?pageID=p4wYuA 
 
@@ -47,6 +47,8 @@ You also might need to tell Java about BDB
 {{{
 #ln -s /usr/lib/BerkeleyDB/lib/libdb_java..  /Library/Java/Extentions
 }}}
+
+Windows gets an official installer...
 
 ===ImageMagick===
 
