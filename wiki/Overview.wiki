@@ -7,7 +7,7 @@ SparkwiseOS is the open source code used to run the online free service http://s
 It can be set up and run on any Linux, Windows or Mac in a development and production mode. It is developed in Java and Javascript, mostly. SparkwiseOS relies on plenty of other open source [Dependencies dependencies] which are distributed with the project.
 
 =Architecture=
-The Sparkwise application is comprised of a user interface, the dashboard data services and third party integration points. The [DashboardAPI Dashboard API] contains a list of the data services, which are intended to be client agnostic. The services can been called as JSON or AMF (other gateways could be added as well). Users create Dashboard of Widgets. In the diagram below, the queue is created from a list of widgets that need to get fresh data.
+The Sparkwise application is comprised of a user interface, the dashboard data services and third party integration points. The [DashboardAPI Dashboard API] contains a list of the data services, which are intended to be client agnostic. The services can been called as JSON or AMF (other gateways could be added as well). 
 
 https://docs.google.com/drawings/pub?id=16B8tyoIMSymMYhwxE0UAgX4JVRIGtjBl4oOmG0cxkrY&w=578&h=546&.png
 
