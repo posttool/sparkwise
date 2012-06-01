@@ -1,15 +1,30 @@
 <url-mappings>
-	
+
+	<url-mapping name="index" secure="false">
+		<url>/?(index\.html)?(\?.*)?</url>
+		<template-path>/index.fhtml</template-path>
+	</url-mapping>
+	<url-mapping name="login" secure="false">
+		<url>/signin/?</url>
+		<template-path>/index.fhtml</template-path>
+	</url-mapping>
+	<url-mapping name="signup" secure="false">
+		<url>/signup/?</url>
+		<template-path>/index.fhtml</template-path>
+	</url-mapping>
+
 	<url-mapping name="dashboard" secure="false">
-		<url>https?://my-dev-machi.ne/dashboard</url>
+		<url>/dashboard/?</url>
 		<template-path>/tool/dashboard.fhtml</template-path>
 	</url-mapping>
+	
 	<url-mapping name="public dashboard" secure="false">
-		<url>https?://my-dev-machi.ne/b/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})?(\?.*)?</url>
+		<url>/b/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})?(\?.*)?</url>
 		<template-path>/tool/dashboard-published.fhtml?uuid=$3&amp;$4</template-path>
 	</url-mapping>
+	
 	<url-mapping name="widget-embed" secure="false">
-		<url>https?://my-dev-machi.ne/w/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})</url>
+		<url>/w/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})</url>
 		<template-path>/tool/widget-embed.fhtml?uuid=$3</template-path>
 	</url-mapping>
 
