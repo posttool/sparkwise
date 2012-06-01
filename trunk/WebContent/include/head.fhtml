@@ -1,0 +1,40 @@
+<#macro HTML title s3bucket ga_tracking_code subtitle="" scripts=[] csses=[]>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8>
+    <title>${title}<#if subtitle?has_content>: ${subtitle}</#if></title>
+    <base href="${web_url}/dashboard" />
+	<meta name="description" content=""/> 
+<#list csses as css>
+     <link rel="stylesheet" type="text/css" href="${css}" media="screen" />
+</#list>
+    <script src="static/js/lib/ps_client_network.js" type="text/javascript"></script>  
+    <script type="text/javascript">
+    com_pagesociety_web_ModuleRequest.USE_JSONP = false;
+    com_pagesociety_web_ModuleRequest.SERVICE_URL = "${web_url}";
+    com_pagesociety_web_ResourceUtil.init([ 
+      { resource_module_name: "Resource", resource_entity_name: "Resource", resource_base_url: "http://${s3bucket}.s3.amazonaws.com/" }
+    ]);
+    var IS_IOS = IS_WEBKIT = ${ (user_os?lower_case?contains('ipad') || user_os?lower_case?contains('iphone'))?string };
+    </script>
+<#list scripts as script>
+    <script src="${script}" type="text/javascript"></script>
+</#list>
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', "${ga_tracking_code}"]);
+	  _gaq.push(['_trackPageview']);
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="viewport" content="width=1100, user-scalable=no">
+    <link rel="apple-touch-icon" href="/static/images/logo_mobile.png" />
+    <link rel="apple-touch-startup-image" href="/static/images/logo_mobile.png" />
+</head>
+</#macro>

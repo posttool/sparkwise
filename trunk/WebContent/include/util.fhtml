@@ -1,0 +1,72 @@
+
+<#macro META_LANG>
+
+<#switch system.current_lang>
+  <#case "kr">
+  <meta http-equiv="content-language" content="ko" />
+  <#break>
+  <#case "cn">
+  <meta http-equiv="content-language" content="zh" />
+  <#break>
+  <#case "jp">
+  <meta http-equiv="content-language" content="ja" />
+  <#break>
+</#switch>
+
+</#macro>
+
+
+
+
+
+
+
+<#if params.developer??>
+<div id="developer">
+<h3>developer info</h3>
+<pre>
+<h3>data map</h3>
+<#list data?keys as prop>
+    <@dump_param key=prop map=data/>
+</#list>
+<h3>system map</h3>
+<#list system?keys as prop>
+    <@dump_param key=prop map=system/>
+</#list>
+</pre>
+</div>
+
+</#if>
+
+<#macro dump_param key map>
+<#if map[key]??>
+<#assign item = map[key]/>
+	<#if item?is_method>
+${key} = ?? (method)
+		<#elseif item?is_enumerable>
+${key} = <#list item as l>${l?string}<#if l_has_next>,</#if></#list>
+		<#elseif item?is_hash_ex>
+${key} = ${item?string}
+		<#elseif item?is_number>
+${key} = ${item}
+		<#elseif item?is_string>
+${key} = "${item}"
+		<#elseif item?is_boolean>
+${key} = ${item?string}
+		<#elseif item?is_date>
+ ${key} = ${item?string("yyyy-MM-dd HH:mm:ss zzzz")}
+		<#elseif item?is_transform>
+${key} = ?? (transform)
+		<#elseif item?is_macro>
+${key} = ?? (macro)
+		<#elseif item?is_hash>
+${key} = ?? (hash)
+		<#elseif item?is_node>
+${key} = ?? (node)
+	</#if>
+<#else>
+${key} = null
+</#if>
+
+</#macro>
+

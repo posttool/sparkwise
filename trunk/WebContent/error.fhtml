@@ -1,0 +1,34 @@
+<#include "/include/sparkwise.fhtml"/>
+<@SPARKWISEHTML subtitle="404 AUTHORIZATION REQUIRED"/>
+
+<div id="page-wrapper" class="page-error">
+<div id="content">
+  	<div class="wrap">
+		<div class="page-error-msg">
+			<h3>404 PAGE NOT FOUND</h3>
+			<p>Sorry, the Sparkwise page you&rsquo;re trying to access no longer exists.
+			Visit us at <a href="http://www.sparkwi.se">home</a>, <a href="http://www.sparkwi.se/signup">sign up</a> or 
+			<a href="http://www.sparkwi-staging.se/signin">sign in</a>.</p>
+		</div>
+		
+		<div class="clear"></div>
+	</div>
+</div>
+	
+</div>
+
+<script>
+$(document).ready(function(){
+<@SPARKWISE_WEBFONT_SCRIPT "init" />
+
+	var init = function()
+	{
+		$_footer_init();
+    	$_registration_init();
+    }
+});
+</script>
+<@SPARKWISEFOOTER/>
+
+</body>
+</html>

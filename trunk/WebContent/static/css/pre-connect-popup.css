@@ -1,0 +1,44 @@
+/* =Pre connect popup windows
+----------------------------- */
+body {
+	margin: 0; padding: 0;
+	font-family:  Helvetica Neue, Helvetica, 'helvetica CY', Arial, 'Arial Narrow';
+}
+.pre-connect-popup {
+	
+}
+.pre-connect-popup .header-bar {
+	background: url(/static/image/bg-pcw-header.png) repeat-x top left;
+	padding: 0 14px;
+	line-height: 37px;
+	text-transform: uppercase;
+	color: #ccc;
+	font-size: 12px;
+	font-weight: 700;
+}
+.pre-connect-popup .popup-text {
+	padding: 14px;
+	font-size: 12px;
+	color: #666;
+	line-height: 22px;
+}
+
+
+.standard-button {
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	border: none;
+	padding:  0 15px;
+	height: 30px;
+	line-height: 30px;
+	display: block; float: left;
+	background: url(/static/image/bg-standard-button.jpg) repeat-x top left;
+	color: #fff;
+	font-size: 12px;
+	text-decoration: none;
+	margin-right: 10px;
+}
+.standard-button:hover {
+	background-position: bottom left;
+}

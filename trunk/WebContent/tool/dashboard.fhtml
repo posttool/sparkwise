@@ -1,0 +1,195 @@
+<#include '/include/sparkwise.fhtml'/>
+<#include '/include/facebook.fhtml'/>
+
+<#if user_context.user??>
+<@SPARKWISEHTML subtitle="Dashboard" show_welcome=user_context.show_welcome??/>
+<@SPARKWISENAV/>
+<div id="wrapper">
+<div id="page-wrapper" class="page-dashboard"> <!-- page wrapper -->
+
+<div id="widget-chooser">
+
+    <div id='widget-tabs-wrapper'>
+    	<div class='wrap'>
+		    <ul id="widget-tabs"></ul>
+    	</div>
+    </div>
+    
+    <!-- div id="widget-category-bg">&nbsp;</div -->
+	<div id="widget-category-wrapper"></div>
+	
+</div>
+
+
+<div id="dashboards-and-options"><div class="wrap">
+
+	<div id="dashboards"> </div>
+
+	<div class="dashboard-options">
+		<a class="dashboard-tools">Board Tools</a>
+		<div class="dashboard-tools-dd dropdown-menu"><ul class="dropdown-menu-items">
+			<li class="first"><a href="#rename" id="tools-dashboard-rename">Name this dashboard...</a></li>
+<!--			<li><a href="#duplicate" id="tools-dashboard-duplicate">Duplicate</a></li>-->
+<!--			<li><a href="#embed" id="tools-dashboard-embed">Embed</a></li>-->
+<!--			<li><a href="#export-csv" id="tools-dashboard-export">Export as CSV...</a></li>-->
+			<li><a href="#" id="tools-dashboard-delete">Delete</a></li>
+			<li><a href="#" id="tools-dashboard-publish">Publish</a></li>
+			<li><a href="#" id="tools-dashboard-fb">Publish to Facebook</a></li>
+			<li><a href="#" id="tools-dashboard-tw">Publish to Twitter</a></li>
+			<li><a href="#" id="tools-dashboard-unpublish">Unpublish</a></li>
+			<li><a href="#" id="tools-dashboard-view-published">View Published</a></li>
+		</ul></div>
+		<div class="clear"></div>
+	</div>
+
+
+</div></div>
+ 
+
+
+<div id="content">
+<div class="wrap">
+
+<div id="grid_wrapper">
+	<div id="grid" style="margin-top: 15px;"></div>
+</div>
+
+<div id="connections-dialog"></div>
+
+<div id="events-dialog"></div>
+
+<div id="account-content">
+	<div class="account-padded">
+		<div id="account-content-user-info-wrapper">
+			<div class="item">
+				<strong>Username</strong><span id="account-first_name-error-msg" class="error-msg" style="margin-left:5px"></span>
+				<div id="account-first_name" class="editable-content"><#if user_context.user.attributes.username??>${user_context.user.attributes.username}</#if></div>
+				<a href="#" id="edit-username-button" class="edit-button">Edit</a>
+				<div class="clear"></div>
+			</div>
+
+			<div class="item">
+				<strong>Email</strong><span id="account-email-error-msg" class="error-msg" style="margin-left:5px"></span>
+				<div id="account-email" class="editable-content">${user_context.user.attributes.email}</div>
+				<a href="#" id ="edit-email-button" class="edit-button">Edit</a>
+				<div class="clear"></div>
+			</div>
+			
+			<div class="item last item-edit-password">
+				<strong>Password</strong><span id="account-email-error-msg" class="error-msg" style="margin-left:5px"></span>
+				<div id="account-email" class="editable-content">********</div>
+				<a  id="edit-password-button" href="#" class="edit-button">Edit</a>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div id = "change-username-container">
+			<form id="change-username-form">
+				<div class="form-item">
+					<div id="change-username-error-msg" class="error-msg" style="margin-top:10px;" ></div>
+					<div id="change-username-ok-msg" class="ok-msg" style="margin-top:10px;" ></div>
+				</div>
+			
+				<div class="form-item">
+					<strong>Username</strong>
+					<input id="account-new-username" name="new-username"/>
+					<div class="clear"></div>
+				</div>
+				<div class="form-buttons">
+					<button value="change" class="btn-save">Save</button>
+					<button value="cancel" class="btn-cancel">Cancel</button>
+				</div>
+			</form>
+		</div>
+		<div id = "change-email-container">
+			<form id="change-email-form">
+				<div class="form-item">
+					<div id="change-email-error-msg" class="error-msg" style="margin-top:10px;" ></div>
+					<div id="change-email-ok-msg" class="ok-msg" style="margin-top:10px;" ></div>
+				</div>
+			
+				<div class="form-item">
+					<strong>Email</strong>
+					<input id="account-new-email" name="new-email"/>
+					<div class="clear"></div>
+				</div>
+				<div class="form-buttons">
+					<button value="change" class="btn-save">Save</button>
+					<button value="cancel" class="btn-cancel">Cancel</button>
+				</div>
+			</form>
+		</div>
+		
+		<div id = "change-password-container">
+			<form id="change-password-form">
+				<div class="form-item">
+					<div id="change-password-error-msg" class="error-msg" style="margin-top:10px;" ></div>
+					<div id="change-password-ok-msg" class="ok-msg" style="margin-top:10px;" ></div>
+				</div>
+
+				<div class="form-item">
+					<strong>New Password</strong>
+					<input type="password" name="new-pw"/>
+					<div class="clear"></div>
+				</div>
+				<div class="form-item">
+					<strong>Confirm New</strong>
+					<input type="password" name="new-pw2"/>
+					<div class="clear"></div>
+				</div>
+				<div class="form-buttons">
+					<button value="change" class="btn-save ">Save</button>
+					<button value="cancel" class="btn-cancel">Cancel</button>
+				</div>
+			</form>
+			
+		</div>
+	</div>
+</div>
+
+<br/>
+
+</div>
+</div>
+
+
+<iframe name="hidden_iframe_for_upload" width="0" height="0" frameborder="0" allowtransparency="true"></iframe>
+
+<script>
+
+$(document).ready(function()
+{
+
+	<@SPARKWISE_WEBFONT_SCRIPT "init" />
+
+	var init = function()
+	{
+		$_footer_init();
+		$_settings_menu_init();
+	    $_dashboard_init("${web_url}");
+	    $_connections_init();
+	    $_account_init(<#if user_context.user.attributes.username??>'${user_context.user.attributes.username}'<#else>null</#if>,<#if user_context.user.attributes.email??>'${user_context.user.attributes.email}'<#else>null</#if>);
+	    $_events_init();
+		if(window.location.hash == '#forgot_password')
+		{
+			g_show_account('password');
+		}
+	}
+   
+});
+
+</script>
+<@KEEPALIVE/>
+<@FACEBOOK "${application.moduleMap['Authorization'].params['facebook-app-id']}" "${web_url}" />
+
+
+<#else>
+<script>location.href = 'signin';</script>
+</#if>
+
+<@SPARKWISEFOOTER/>
+
+
+</div> <!-- end page wrapper -->
+</div> <!-- end wrapper -->
+</body>
+</html>

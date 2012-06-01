@@ -1,0 +1,234 @@
+<#include '/include/head.fhtml'/>
+
+<#assign is_dev = web_url?index_of('localhost')!=-1/>
+<#assign script_key><#if is_dev>dev<#else>production</#if></#assign>
+
+<#assign scripts = { 
+	"lib": [
+		"static/js/lib/browserdetect.js",
+    	"static/js/lib/jquery-1.7.1.js",
+    	"static/js/lib/jquery-ui-1.8.11.custom.min.js",
+   		"static/js/lib/jquery.cookie.js",
+    	"static/js/lib/jquery.field.js",
+    	"static/js/lib/jquery.editable.js",
+	   	"static/js/lib/raphael-2.0.1.js",
+	    "static/js/lib/jquery.disable.text.select.pack.js",
+	    "static/js/lib/jquery.selectbox.js",  
+	    "static/js/lib/jquery.mousewheel.js",  
+	    "static/js/lib/mwheelIntent.js",    
+	    "static/js/lib/jscrollpane.js",    
+	    "http://maps.googleapis.com/maps/api/js?key=AIzaSyCxiUxCVIUuznxwlPH94OqpE4ezysBiwKg&sensor=false",
+	    "static/js/lib/markerclusterer.js"
+	],
+	"dev-tool": [
+	    "static/js/color_util.js",
+	    "static/js/basic_ui.js",
+	    "static/js/sparkwise_date.js",
+	    "static/js/se_sparkwi.js",
+	    "static/js/registration.js",
+	    "static/js/feedback.js",
+	    "static/js/account.js",
+	    "static/js/events.js",
+	    "static/js/carousel.js",
+	    "static/js/connections.js",
+	    "static/js/se_sparkwi_dashboard.js",
+	    "static/js/se_sparkwi_dashboard_controller.js",
+	    "static/js/se_sparkwi_dashboard_cell.js",
+	    "static/js/se_sparkwi_dashboard_tabs.js",
+	    "static/js/se_sparkwi_dashboard_widget_selector.js",
+	    "static/js/se_sparkwi_widget_config_mixins.js",
+	    "static/js/se_sparkwi_widget_config_help.js",
+	    "static/js/se_sparkwi_widget_config.js",
+	    "static/js/se_sparkwi_widget_util.js",
+	    "static/js/se_sparkwi_widget_viz_util_graph.js",
+	    "static/js/se_sparkwi_widget_viz_util_map.js",
+	    "static/js/se_sparkwi_widget_viz_util_percent_change.js",
+	    "static/js/se_sparkwi_widget_viz_util_percent_complete.js",
+	    "static/js/se_sparkwi_widget_viz_util_pie.js",
+	    "static/js/se_sparkwi_widget_viz_util_total.js",
+	    "static/js/se_sparkwi_widget_viz_util_feed.js",
+	    "static/js/se_sparkwi_widget_viz_util_slideshow.js",
+	    "static/js/se_sparkwi_widget_viz_util.js",
+	    "static/js/se_sparkwi_widget_viz.js",
+	    "static/js/footer.js" 
+	], 
+	"production-tool": [
+		"static/js/-/0/board.js" 
+	],
+	"dev-public": [
+		"static/js/color_util.js",
+	    "static/js/basic_ui.js",
+	    "static/js/sparkwise_date.js",
+	    "static/js/events.js",
+	    "static/js/se_sparkwi.js",
+	    "static/js/se_sparkwi_dashboard_public.js",
+	    "static/js/widget_embed.js",
+	    "static/js/se_sparkwi_dashboard_cell.js",
+	    "static/js/se_sparkwi_widget_util.js",
+	    "static/js/se_sparkwi_widget_viz_util_graph.js",
+	    "static/js/se_sparkwi_widget_viz_util_map.js",
+	    "static/js/se_sparkwi_widget_viz_util_percent_change.js",
+	    "static/js/se_sparkwi_widget_viz_util_percent_complete.js",
+	    "static/js/se_sparkwi_widget_viz_util_pie.js",
+	    "static/js/se_sparkwi_widget_viz_util_total.js",
+	    "static/js/se_sparkwi_widget_viz_util_feed.js",
+	    "static/js/se_sparkwi_widget_viz_util_slideshow.js",
+	    "static/js/se_sparkwi_widget_viz_util.js",
+	    "static/js/se_sparkwi_widget_viz.js",
+	    "static/js/footer.js"
+	],
+	"production-public": [
+		"static/js/-/0/public.js"
+	    "static/js/widget_embed.js"
+	] } />
+
+
+<#macro SPARKWISE_WEBFONT_SCRIPT init>
+	WebFontConfig = {
+		google: { families: [ 'Oswald', 'Nunito' ] },
+		fontactive: function(fontFamily, fontDescription) 
+		{
+			//console.log(fontFamily,fontDescription); could just start up when akzidenz loads
+		},
+		active: function()
+		{
+			${init}();
+		}
+	};
+	(function() {
+        var wf = document.createElement('script');
+        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+            '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+        wf.type = 'text/javascript';
+        wf.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(wf, s);
+    })();
+</#macro>
+
+
+
+
+<#macro SPARKWISEHTML subtitle show_welcome=false>
+<@HTML
+	title="Sparkwise | ${subtitle}"
+	ga_tracking_code="UA-XXXX-1"
+	s3bucket="sparkwise"
+	scripts = scripts.lib + scripts[script_key+"-tool"]
+	csses=[
+		"static/css/lib/custom-theme-0/jquery-ui-1.8.11.custom.css",
+		"static/css/sparkwise.css",
+		"static/css/jscrollpane.css",
+		"static/css/rte.css"
+		]
+	/>
+<body>
+<#if show_welcome?? && show_welcome>
+	<div id = 'welcome_overlay'>
+	    <div id="welcome_overlay_wrap">
+	          	<img id="welcome_overlay_image" src="static/image/welcome_overlay.png"/>
+		</div>
+	</div>
+
+	<script>
+	$('#welcome_overlay').click(
+		function(e){
+			$(this).fadeOut(500);
+			do_module('Dashboard/ClearWelcome', [], function()
+		    		   {
+	    					
+		    		   });
+	    			});	   
+	</script>
+</#if>
+</#macro>
+
+
+
+
+<#macro HTML_PUBLIC subtitle>
+<@HTML
+	title="Sparkwise"
+	ga_tracking_code="UA-12121-1"
+	s3bucket="sparkwise"
+	scripts= 
+		scripts.lib + scripts[script_key+"-public"]
+	csses=[
+		"static/css/lib/custom-theme-0/jquery-ui-1.8.11.custom.css",
+		"static/css/sparkwise.css",
+		"static/css/jscrollpane.css"
+		]
+	/>
+</#macro>
+
+
+<#macro SPARKWISENAV>
+<div id="persistent0bg"></div>
+<div id="persistent0">
+<div id="header"><div class='wrap'>
+      <div id='logo'>Sparkwise  Dashboard</div>
+      <div class='user-info'>
+  		<div class='dropdown'>
+			<#if user_context.user??>
+          		<span id='header-user-name'><#if user_context.user.attributes.username??>${user_context.user.attributes.username}<#else>${user_context.user.attributes.email}</#if></span>
+          		&nbsp;<span style="color: #666;"><img src="static/image/divider.png" alt="|" /></span>&nbsp;
+          		<div id="settings-menu">
+					<a id="settings-tools-id" class="settings-tools">Settings</a>
+				    <div id="settings-dd" class="dropdown-menu">
+				    	<ul class="dropdown-menu-items">
+			   				<li class="first"><a href="#" id="settings-menu-my-account">Account</a></li>
+			   				<li><a id="connections-button">Connections</a></li>
+			   				<li><a id="settings-menu-events">Manage Events</a></li>
+					    </ul>
+				    </div>
+				</div>
+          		&nbsp;<span style="color: #666;"><img src="static/image/divider.png" alt="|" /></span>&nbsp;
+          		<a href="javascript:do_logout();">Sign Out</a>
+      		<#else>
+				Hey <b>Friend</b>
+          		&nbsp;<span style="color: #666;"><img src="static/image/divider.png" alt="|" /></span>&nbsp;
+				<a href="/register">Sign up</a>
+          		&nbsp;<span style="color: #666;"><img src="static/image/divider.png" alt="|" /></span>&nbsp;
+				<a href="/register">Sign in</a>
+    		</#if>
+  		</div>
+		
+  	</div>
+	<br clear='all'/>
+	</div>
+</div>
+</div>
+
+
+</#macro>
+
+
+
+
+<#macro KEEPALIVE>
+<script>
+function keepalive()
+{
+	do_module("User/GetUser",[],function(user)
+	{
+ 	});
+}
+setInterval("keepalive()", 1000 * 60 * 15);
+</script>
+</#macro>
+
+
+
+
+<#macro SPARKWISEFOOTER>
+<div id="footer">
+	<div class="wrap">
+		<ul id="footer-nav">
+			<li class="first"><a href="/">Home</a></li>
+			<li><a href="javascript:void();" id="mnu-terms">Terms and Conditions</a></li> 
+			<!-- li><a href="http://sparkwi-staging.se/source">Source</a></li -->
+			<li><a href="javascript:void();" id="mnu-privacy-policy">Privacy Policy</a></li>
+		</ul>
+  </div>
+</div>
+</#macro>

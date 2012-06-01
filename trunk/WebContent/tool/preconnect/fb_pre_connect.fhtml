@@ -1,0 +1,65 @@
+<!DOCTYPE html> 
+<html xmlns:fb="https://www.facebook.com/2008/fbml">
+  <head> 
+    <title> 
+      Connecting to Facebook
+    </title>
+    <link rel="stylesheet" type="text/css" href="/static/css/pre-connect-popup.css" media="screen" />
+  </head> 
+<body> 
+
+<div id="fb-root"></div>
+<div id="message"></div>
+
+<script>
+window.fbAsyncInit = function() {
+
+  FB.init({ appId: '${params.app_id}', 
+	    status: true, 
+	    cookie: true,
+	    xfbml: true,
+	    oauth: true});
+
+  function do_it(response) 
+  {
+	var link = "<a href='${params.next}' class='standard-button'>Continue</a>" +
+				"<a href='javascript:self.close()' class='standard-button'>Cancel</a>";
+	var header_bar = "<div class='header-bar'>Connecting...</div>";
+	var message = header_bar + 
+				  "<div class='popup-text'>" + 
+				  "<p>Sparkwise will now connect to your Facebook account."+
+				  "Make sure the Facebook account you are currently logged in to is the one you want to connect. "+ 
+				  "What happens if you connect to the wrong account? No big deal. Just remove it in the Sparkwise Connections window and start over.</p>"+
+				   link + "</div>";
+				   
+	message = "<div class='pre-connect-popup'>" + message + "</div>";
+	
+		
+    if (response.authResponse) 
+    {
+      //user is already logged in and connected
+        FB.logout(function(response) {
+			window.location='${params.next}';
+		}); 
+    } 
+    else 
+    {
+
+		document.getElementById('message').innerHTML = message;
+    }
+  }
+
+  // run once with current status and whenever the status changes
+  FB.getLoginStatus(do_it);
+};
+	
+(function() {
+  var e = document.createElement('script'); e.async = true;
+  e.src = document.location.protocol 
+    + '//connect.facebook.net/en_US/all.js';
+  document.getElementById('fb-root').appendChild(e);
+}());
+
+</script>
+</body> 
+</html>

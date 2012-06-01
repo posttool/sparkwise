@@ -1,0 +1,18 @@
+<#include '/include/sparkwise.fhtml'/>
+<@HTML_PUBLIC ''/>
+
+<body>
+<div id="graph_tooltip"></div>
+<div id="widget-wrapper"></div>
+<script>
+$(document).ready(function(){
+	<@SPARKWISE_WEBFONT_SCRIPT "init" />
+	var init = function()
+	{
+		$_widget_embed_init('${params.uuid}');
+	}
+});
+</script>
+</body>
+</html>
+
