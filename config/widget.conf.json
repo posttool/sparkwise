@@ -1,0 +1,94 @@
+{
+	"package": "se.sparkwi.web.widget",
+	"categories": [
+		{	
+			"name": "Google Analytics",
+			"widgets": [
+				{ "class": "GoogleAnalytics_GetSiteVisits", "name": "Site Visits per Day" },
+				{ "class": "GoogleAnalytics_GetAbsoluteUniqueVisitors", "name": "Absolute Unique Visitors per Day" },
+				{ "class": "GoogleAnalytics_GetPercentNewVisits", "name": "Percent New Visits per Day" },
+				{ "class": "GoogleAnalytics_GetPageViews", "name": "Page Views per Day" },
+				{ "class": "GoogleAnalytics_GetPagesPerVisit", "name": "Pages per Visit per Day" },
+				{ "class": "GoogleAnalytics_GetBounceRate", "name": "Bounce Rate per Day" },
+				{ "class": "GoogleAnalytics_GetAvgTimeOnSite", "name": "Avg Time on Site per Day" },
+				{ "class": "GoogleAnalytics_GetSiteReferrers", "name": "Top Site Referrers per Day" },
+				{ "class": "GoogleAnalytics_GetTrafficSources", "name": "Traffic Sources per Day" },
+				{ "class": "GoogleAnalytics_GetBrowsers", "name": "Browsers per Day" }
+			]
+		},
+		{
+			"name": "Facebook",
+			"widgets": [
+				{ "class": "Facebook_GetFriends", "name": "Total Friends"},
+				{ "class": "Facebook_GetMyPosts", "name": "Posts per Day" },
+				{ "class": "Facebook_GetComments", "name": "Comments per Day" },
+				{ "class": "Facebook_GetFanPosts", "name": "Fan Posts per Day" },
+				{ "class": "Facebook_GetVideoLikes", "name": "Total Video Likes" },
+				{ "class": "Facebook_GetAlbumLikes", "name": "Total Album Likes" },
+				{ "class": "Facebook_GetPageViews", "name": "Page Views per Day" },
+				{ "class": "Facebook_GetPageLikes", "name": "Total Page Fans" },
+				{ "class": "Facebook_GetUserGenders", "name": "Fan Genders" },
+				{ "class": "Facebook_GetUserAgeGroup", "name": "Fan Age Groups" }
+			]
+		},
+		{
+			"name": "Twitter",
+			"widgets": [
+				{ "class": "Twitter_GetFollowersSearch", "name": "Total Followers" },
+				{ "class": "Twitter_GetTweetsSearch", "name": "Tweets per Day" },
+				{ "class": "Twitter_GetRetweetsSearch", "name": "Retweets per Day" },
+				{ "class": "Twitter_GetMentionsSearch", "name": "Mentions per Day" },
+				{ "class": "Twitter_GetRepliesSearch", "name": "Replies per Day" },
+				{ "class": "Twitter_GetHashtagSearch", "name": "Hashtags per Day" },
+				{ "class": "Twitter_GetLinkSearch", "name": "URL Links per Day" }
+			]
+		},	
+		{
+			"name": "Video",
+			"widgets": [
+				{ "class": "YouTube_GetViews", "name": "YouTube Video Views" },
+				{ "class": "YouTube_GetChannelViews", "name": "YouTube Channel Views" },
+				{ "class": "YouTube_GetChannelSubscribers", "name": "YouTube Channel Subscribers" },
+				{ "class": "Vimeo_GetViews", "name": "Vimeo Video Views" },
+				{ "class": "Vimeo_GetChannelViews", "name": "Vimeo Channel Views" }
+			]
+		},
+		{
+			"name": "Search",
+			"widgets": [
+				{ "class": "Bing_SearchWeb", "name": "Search Web" },
+				{ "class": "Bing_GetNews", "name": "Search News" },
+				{ "class": "GoogleAlerts_GetFeed", "name": "Google Alerts" }
+			]
+		},
+		{
+		    "name": "Story",
+		    "widgets": [
+				{ "class": "Story_Text", "name": "Enter Text" },
+				{ "class": "Story_Upload", "name": "Upload Logo" },
+				{ "class": "Story_Embed", "name": "Embed Video" },
+				{ "class": "Story_Embed_SoundCloud", "name": "Embed MP3" },
+				{ "class": "Story_Embed_Issu", "name": "Embed Issuu PDF" },
+				{ "class": "Picasa_GetSlideshow", "name": "Picasa Slideshow" },
+				{ "class": "Flickr_GetSlideshow", "name": "Flickr Slideshow" }
+		    ]  
+		},
+		{	
+			"name": "Custom",
+			"widgets": [
+				{ "class": "Custom_Manual", "name": "Enter Manual Data" },
+				{ "class": "Custom_JSON", "name": "Create JSON Feed" },
+				{ "class": "Custom_XML", "name": "Create XML Feed" },
+				{ "class": "GoogleSpreadsheets_GetTrend", "name": "Google Spreadsheet for Trend" },
+				{ "class": "GoogleSpreadsheets_GetDict", "name": "Google Spreadsheet for Pie" }
+			]
+		},
+		{
+			"name":"Compare",
+			"widgets": [
+				{ "class": "Correlation_Correlate", "name": "Make Comparison" }
+			]
+		
+		}
+	]
+}
