@@ -36,10 +36,10 @@ case $1 in
 
         checkout)
                 cd $APP_HOME/checkout
-                svn checkout $SVN_ROOT/$APP_NAME
+                svn checkout $SVN_ROOT
                 ;;
         build)
-                cd $APP_HOME/checkout/$APP_NAME
+                cd $APP_HOME/checkout
                 ant build_server
                 ;;
         deploy)
