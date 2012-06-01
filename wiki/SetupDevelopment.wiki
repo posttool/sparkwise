@@ -6,6 +6,8 @@
 
 ===Eclipse===
 
+Get the Eclipse IDE for Java EE Developers
+
 http://www.eclipse.org/downloads
 
 Once installed, start it up and add subversion (subclipse) with these instructions (using the update manager) http://subclipse.tigris.org/servlets/ProjectProcess?pageID=p4wYuA 
