@@ -4,8 +4,21 @@
 
 SparkwiseOS is the open source code used to run the online free service http://sparkwi.se
 
-It can be set up and run on any Linux, Windows or Mac OS X machine in a development and production mode. It is developed in Java and OO Javascript. SparkwiseOS has plenty of open source [Dependencies dependencies].
+It can be set up and run on any Linux, Windows or Mac in a development and production mode. It is developed in Java and Javascript, mostly. SparkwiseOS relies on plenty of other open source [Dependencies dependencies] which are distributed with the project.
 
-Follow setup instructions to create OAuth application [SetupKeys keys] with third party services, such as Google Analytics and Facebook, as well as set up a [SetupServer server] running Sparkwise.
+=Architecture=
 
-_More documentation and code to come in the following weeks. Please get in touch for any reason: David Karam dkaram@sparkwi.se _
+Once registered, users _connect_ with third party sources. For each connection, the user can create instances of _widgets_ which are arranged in _dashboards_. Widgets are composed of display properties and a _data proxy_. The data proxy consists of of a connection, a widget definition and data _selector_ settings, for example: 'Google Analytics connection for Bob', 'Get Unique Visitors', 'http://www.subgenius.com'.
+
+https://docs.google.com/drawings/pub?id=16B8tyoIMSymMYhwxE0UAgX4JVRIGtjBl4oOmG0cxkrY&w=478&h=446&.png
+
+=Setup=
+
+SparkwiseOS aggregates data from a variety of sources on behalf of registered users. In order to do this, the third party services require that we get API keys from them. Follow the [SetupKeys setup instructions] to create  OAuth application keys with third party services, such as Google Analytics and Facebook. For more information on OAuth, see http://en.wikipedia.org/wiki/OAuth
+
+Setting up a development environment or server is simple. Take a look at SetupDevelopment and SetupServer for more information.
+
+_Please get in touch for any reason: David Karam dkaram@sparkwi.se _
+
+
+<g:plusone size="medium"></g:plusone>
