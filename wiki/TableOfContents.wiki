@@ -7,6 +7,5 @@
    * [DashboardAPI Dashboard API]
    * [DashboardEntities Dashboard Entities]
    * [WidgetStates Widget State Transitions]
-   * Overview of Architecture
    * How to add a data collection widget
    * Notes on the database
