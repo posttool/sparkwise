@@ -8,9 +8,9 @@ It can be set up and run on any Linux, Windows or Mac in a development and produ
 
 =Architecture=
 
-Once registered, users _connect_ with third party sources. For each connection, the user can create instances of _widgets_ which are arranged in _dashboards_. Widgets are composed of display properties and a _data proxy_. The data proxy consists of of a connection, a widget definition and data _selector_ settings, for example: 'Google Analytics connection for Bob', 'Get Unique Visitors', 'http://www.subgenius.com'.
-
 https://docs.google.com/drawings/pub?id=16B8tyoIMSymMYhwxE0UAgX4JVRIGtjBl4oOmG0cxkrY&w=478&h=446&.png
+
+Once registered, users _connect_ with third party sources. For each connection, the user can create instances of _widgets_ which are arranged in _dashboards_. Widgets are composed of display properties and a _data proxy_. The data proxy consists of of a connection, a widget definition and data _selector_ settings, for example: 'Google Analytics connection for Bob', 'Get Unique Visitors', 'http://www.subgenius.com'.
 
 =Setup=
 
