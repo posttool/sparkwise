@@ -9,15 +9,15 @@ It can be set up and run on any Linux, Windows or Mac in a development and produ
 =Architecture=
 The Sparkwise application is comprised of a user interface, the dashboard data services and third party integration points. The [DashboardAPI Dashboard API] contains a list of the data services, which are intended to be client agnostic. The services can been called as JSON or AMF (other gateways could be added as well). Users create Dashboard of Widgets. In the diagram below, the queue is created from a list of widgets that need to get fresh data.
 
-https://docs.google.com/drawings/pub?id=16B8tyoIMSymMYhwxE0UAgX4JVRIGtjBl4oOmG0cxkrY&w=478&h=446&.png
+https://docs.google.com/drawings/pub?id=16B8tyoIMSymMYhwxE0UAgX4JVRIGtjBl4oOmG0cxkrY&w=578&h=546&.png
 
 Once registered, users are able to _connect_ with third party sources. For each connection, the user can create instances of _widgets_ which are arranged in _dashboards_. Widgets are composed of display properties and a _data proxy_. The data proxy consists of of a connection, a widget definition and data _selector_ settings, for example: 'Google Analytics connection for Bob', 'Get Unique Visitors', 'subgenius.com'.
 
-Take a look at the [DashboardEntities dashboard entities] for a complete overview of the data structures returned from the API.
+Take a look at the [DashboardEntities entities] for a complete overview of the data structures returned from the API.
 
-Widgets go through many states as they are set up and as they collect data over time. Following is a simplified overview of the process. More detail can be seen at WidgetStates.
+Widgets go through many states as they are set up and as they collect data over time. Following is a simplified overview of the process. More detail can be seen at [WidgetStates widget states].
 
-https://docs.google.com/drawings/pub?id=1CQT_A9v7rupgMiOx4l2FccatPpbDqN0KCLgknLMD5fY&w=463&h=482&.png
+https://docs.google.com/drawings/pub?id=1CQT_A9v7rupgMiOx4l2FccatPpbDqN0KCLgknLMD5fY&w=563&h=582&.png
 
 
 
