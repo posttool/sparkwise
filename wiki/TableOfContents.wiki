@@ -7,5 +7,5 @@
    * [DashboardAPI Dashboard API]
    * [DashboardEntities Dashboard Entities]
    * [WidgetStates Widget State Transitions]
-   * [NewWidget How to add a widget]
+   * [WidgetHowTo How to add a widget]
    * Notes on the database
