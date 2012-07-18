@@ -50,19 +50,33 @@
 			</module-params>
 		</module>
 
+
 		<module name="Registration">
 			<module-class>se.sparkwi.web.module.SparkwiseRegistration</module-class>
 			<module-slots>
 				<module-slot name="store" 		 instance="Store"/>
 				<module-slot name="user-module"  instance="User"/>
 				<module-slot name="email-module" instance="Email"/>
-				<module-slot name="mailing-list-module" instance="Newsletter"/>
 			</module-slots>
 			<module-params>
 				<do-email-confirmation>true</do-email-confirmation>
 				<registration-email-template>confirm-registration.fm</registration-email-template>
 				<registration-email-subject>Welcome To Sparkwise</registration-email-subject>
 				<activate-account-url>$WEB_ROOT_URL/activate-registration.fhtml</activate-account-url>
+			</module-params>
+		</module>
+		
+		<module name="ForgotPassword">
+			<module-class>com.pagesociety.web.module.registration.ForgotPasswordModule</module-class>
+			<module-slots>
+				<module-slot name="store" 		 instance="Store"/>
+				<module-slot name="user-module"  instance="User"/>
+				<module-slot name="email-module" instance="Email"/>
+			</module-slots>
+			<module-params>
+				<forgot-password-email-template>forgot-password.fm</forgot-password-email-template>
+				<forgot-password-email-subject>Your Password Request</forgot-password-email-subject>
+				<restore-password-url>$WEB_ROOT_URL/forgot-password-fwd.fhtml</restore-password-url>
 			</module-params>
 		</module>
 
@@ -73,7 +87,6 @@
 				<module-slot name="email-module" instance="Email"/>
 			</module-slots>
 		</module>
-
 	
 		<module name="Authorization">
 			<module-class>se.sparkwi.web.module.auth.OAuthorizationModule</module-class>
@@ -94,10 +107,8 @@
 				<flickr-consumer-key>$FLICKR_CONSUMER_KEY</flickr-consumer-key>
 				<flickr-secret-key>$FLICKR_SECRET_KEY</flickr-secret-key>
 				<bing-app-id>$BING_APP_ID</bing-app-id>
-				<api-fail-every-x-calls>$AUTO_FAIL_ON_EVERY_X_API_CALLS</api-fail-every-x-calls>
 			</module-params>
 		</module>
-
 
 		<module name="Dashboard">
 			<module-class>se.sparkwi.web.module.DashboardModule</module-class>
@@ -116,21 +127,6 @@
 				<date-quantize-resolution>$DATE_QUANTIZE_RESOLUTION</date-quantize-resolution>
 			</module-params>
 		</module>
-
-		<module name="ForgotPassword">
-			<module-class>com.pagesociety.web.module.registration.ForgotPasswordModule</module-class>
-			<module-slots>
-				<module-slot name="store" 		 instance="Store"/>
-				<module-slot name="user-module"  instance="User"/>
-				<module-slot name="email-module" instance="Email"/>
-			</module-slots>
-			<module-params>
-				<forgot-password-email-template>forgot-password.fm</forgot-password-email-template>
-				<forgot-password-email-subject>Your Password Request</forgot-password-email-subject>
-				<restore-password-url>$WEB_ROOT_URL/forgot-password-fwd.fhtml</restore-password-url>
-			</module-params>
-		</module>
-
 
 		<module name="ResourcePathProvider">
 			<module-class>com.pagesociety.web.module.S3.PSS3PathProvider</module-class>	
@@ -167,6 +163,43 @@
 				<module-slot name="dashboard-module"  instance="Dashboard"/>
 			</module-slots>
 		</module>
+		
+		<module name="RawUI">
+			<module-class>com.pagesociety.web.module.raw.RawUIAggregator</module-class>
+		</module>
+
+		<module name="ExcelDumpModule">
+			<module-class>com.pagesociety.web.module.dump.ExcelDumpModule</module-class>
+			<module-slots>
+				<module-slot name="store" instance="Store"/>
+			</module-slots>
+		</module>
+
+
+		<module name="ExcelDumpModuleRawUI">
+			<module-class>com.pagesociety.web.module.dump.ExcelDumpModuleRawUI</module-class>
+			<module-slots>
+				<module-slot name="dump-module" instance="ExcelDumpModule"/>
+			</module-slots>
+		</module>
+
+		<module name="UserModuleRawUI">
+			<module-class>com.pagesociety.web.module.user.UserModuleRawUI</module-class>
+			<module-slots>
+				<module-slot name="user-module" instance="User"/>
+			</module-slots>
+			<module-params>
+			<post-force-login-url>$WEB_ROOT_URL/dashboard</post-force-login-url>
+			</module-params>
+		</module>
+
+		<module name="PersistenceBackupManager">
+			<module-class>com.pagesociety.web.module.persistence.PersistenceBackupManagerRawUI</module-class>
+			<module-slots>
+				<module-slot name="store" instance="Store"/>
+			</module-slots>
+		</module>
+		
 	</modules>
 
 </application>
