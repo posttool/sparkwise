@@ -1506,30 +1506,31 @@ public class DashboardModule extends WebStoreModule implements IEventListener
 			user_obj.put("js_err_f",request.getParameter("js_err_f"));
 
 
-		String return_to    =  "/"+getName()+"/DoAuthorizationReturn/.raw";
-		String redirect_url = authorization_module.getRelativeAuthorizationURL(connection_type, scopes, PROJECT_ENTITY, project.getId(), return_to, user_obj);
-	
+		String bp           = getApplication().getConfig().getWebRootUrl();
+		String return_to    = bp + "/" + getName() + "/DoAuthorizationReturn/.raw";
+		String redirect_url = bp + authorization_module.getRelativeAuthorizationURL(connection_type, scopes, PROJECT_ENTITY, project.getId(), return_to, user_obj);
+		String preconn_prefix = bp + "/tool/preconnect/";
 		try
 		{
 			if (connection_type.equals(ConnectionApi.CONNECTION_TYPE_FACEBOOK))
 			{
 				String app_id = FacebookAuthorizationHandler.facebook_app_id;
-				response.sendRedirect("/tool/preconnect/fb_pre_connect.fhtml?app_id=" + app_id + "&next=" + Text.encodeURIComponent(redirect_url));
+				response.sendRedirect(preconn_prefix + "fb_pre_connect.fhtml?app_id=" + app_id + "&next=" + Text.encodeURIComponent(redirect_url));
 				return;
 			}
 			else if (connection_type.equals(ConnectionApi.CONNECTION_TYPE_VIMEO))
 			{
-				response.sendRedirect("/tool/preconnect/vimeo_pre_connect.fhtml?next=" + Text.encodeURIComponent(redirect_url));
+				response.sendRedirect(preconn_prefix + "vimeo_pre_connect.fhtml?next=" + Text.encodeURIComponent(redirect_url));
 				return;
 			}
 			else if (connection_type.equals(ConnectionApi.CONNECTION_TYPE_GOOGLE_ANALYTICS))
 			{
-				response.sendRedirect("/tool/preconnect/gdata_pre_connect.fhtml?next=" + Text.encodeURIComponent(redirect_url));
+				response.sendRedirect(preconn_prefix + "gdata_pre_connect.fhtml?next=" + Text.encodeURIComponent(redirect_url));
 				return;
 			}
 			else if (connection_type.equals(ConnectionApi.CONNECTION_TYPE_YOUTUBE))
 			{
-				response.sendRedirect("/tool/preconnect/youtube_pre_connect.fhtml?next=" + Text.encodeURIComponent(redirect_url));
+				response.sendRedirect(preconn_prefix + "youtube_pre_connect.fhtml?next=" + Text.encodeURIComponent(redirect_url));
 				return;
 			}
 			response.sendRedirect(redirect_url);
@@ -3264,6 +3265,7 @@ public class DashboardModule extends WebStoreModule implements IEventListener
 		q.gt(0);
 		return COUNT(q);
 	}
+	
 	@Export
 	public int GetNumberOfUsers(UserApplicationContext uctx) throws PersistenceException
 	{

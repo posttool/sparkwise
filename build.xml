@@ -86,13 +86,14 @@ along with Sparkwise.  If not, see <http://www.gnu.org/licenses/>.
 	<target name="compile_js">
 		<property name="version" value="0" />
 		<property name="js_src" location="WebContent/static/js/" />
+		<property name="compiler_jar" location="compiler.jar" />
 		<property name="js_bp" location="${js_src}/-/${version}" />
 
-		<echo message="about to create ${js_bp}" />
+		<echo message="about to create ${js_bp} with ${compiler_jar}" />
 		<mkdir dir="${js_bp}" />
 
 		<exec dir="." executable="java" failonerror="true">
-			<arg line="-classpath WebContent/WEB-INF/lib/compiler.jar" />
+			<arg line="-classpath ${compiler_jar}" />
 			<arg line="com.google.javascript.jscomp.CommandLineRunner" />
 			<arg line="--compilation_level SIMPLE_OPTIMIZATIONS" />
 
