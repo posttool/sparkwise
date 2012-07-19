@@ -33,28 +33,20 @@ import com.pagesociety.web.exception.InitializationException;
 import com.pagesociety.web.exception.WebApplicationException;
 import com.pagesociety.web.module.Export;
 import com.pagesociety.web.module.TransactionProtect;
-import com.pagesociety.web.module.email.IEmailModule;
 import com.pagesociety.web.module.registration.RegistrationModule;
 public class SparkwiseRegistration extends RegistrationModule
 {
 
-	private static final String SLOT_MAILING_LIST_MODULE = "mailing-list-module"; 
-	private static final String SLOT_EMAIL_MODULE		  = "email-module";
 
-	private MailingListModule 		list_module;
-	private IEmailModule 		email_module;
 	
 	public void init(WebApplication app,Map<String,Object> config) throws InitializationException
 	{
 		super.init(app, config);
-		list_module = (MailingListModule)getSlot(SLOT_MAILING_LIST_MODULE);
-		email_module = (IEmailModule)getSlot(SLOT_EMAIL_MODULE);
 	}
 	
 	public void defineSlots() 
 	{
 		super.defineSlots();
-		DEFINE_SLOT(SLOT_MAILING_LIST_MODULE,MailingListModule.class,true);
 	}
 
 	
@@ -80,12 +72,6 @@ public class SparkwiseRegistration extends RegistrationModule
 		if (extra_props == null)
 			extra_props = new OBJECT();
 
-		String updates = extra_props.S("chk_signmeup_for_updates");
-		if (updates!=null && updates.equals("yes"))
-		{
-			list_module.signUp(extra_props.S("txt_email"), extra_props);
-		}
-		
 		if(user_info==null)
 		{
 			user_info = NEW(USERINFO_ENTITY, user, USERINFO_PROPS, OBJECT.encode(extra_props));

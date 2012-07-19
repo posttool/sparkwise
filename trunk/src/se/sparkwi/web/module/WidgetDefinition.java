@@ -58,6 +58,7 @@ public abstract class WidgetDefinition
 	public static final int[] RETURN_TYPE_VOID           		= new int[]{ };
 	public static final int[] RETURN_TYPES_TEXT           		= new int[]{ RETURN_TYPE_TEXT };
 	public static final int[] RETURN_TYPES_NUMBER         		= new int[]{ RETURN_TYPE_NUMBER };
+	public static final int[] RETURN_TYPES_DICT         		= new int[]{ RETURN_TYPE_DICT };
 	public static final int[] RETURN_TYPES_ANNOTATED_NUMBER     = new int[]{ RETURN_TYPE_NUMBER, RETURN_TYPE_ANNOTATED_NUMBER };
 	public static final int[] RETURN_TYPES_SLIDES         		= new int[]{ RETURN_TYPE_SLIDES };
 	
