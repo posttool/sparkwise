@@ -820,45 +820,51 @@ public class DashboardModule extends WebStoreModule implements IEventListener
 //		}
 		Entity proxy = get_proxy_for_widget_instance(wi);
 		WidgetDefinition def = get_definition_for_proxy(proxy);
-		if (def.isLiveDataWidget())
-		{
-			try 
+		try {
+			if (def.isLiveDataWidget())
 			{
-				return def.getData();
-			} 
-			catch (WebApplicationException e)
-			{
-				UPDATE(proxy, WIDGETDATAPROXY_FIELD_STATE, PROXY_STATE_FAILED_DATA_ERROR, WIDGETDATAPROXY_FIELD_LAST_FAILURE_MESSAGE, e.getMessage());
-				return new OBJECT("error", e.getMessage());
-			}
-		}
-		int type  = (Integer)wi.getAttribute(WIDGETINSTANCE_FIELD_TYPE);
-		switch (type)
-		{
-			case WIDGETINSTANCE_TYPE_NORMAL:
-				OBJECT data =  get_data_for_normal_widget(wi,last_x_days);
-				@SuppressWarnings("unchecked")
-				List<OBJECT> vals = (List<OBJECT>)data.get("values");
-				if(last_x_days == 1 && vals.size() == 1)
+				try 
 				{
-					OBJECT val = vals.get(0);
-					String error = (String) val.get(WIDGETDATA_FIELD_ERROR_CODE);
-					if(error != null)
+					return def.getData();
+				} 
+				catch (WebApplicationException e)
+				{
+					UPDATE(proxy, WIDGETDATAPROXY_FIELD_STATE, PROXY_STATE_FAILED_DATA_ERROR, WIDGETDATAPROXY_FIELD_LAST_FAILURE_MESSAGE, e.getMessage());
+					return new OBJECT("error", e.getMessage());
+				}
+			}
+			int type  = (Integer)wi.getAttribute(WIDGETINSTANCE_FIELD_TYPE);
+			switch (type)
+			{
+				case WIDGETINSTANCE_TYPE_NORMAL:
+					OBJECT data =  get_data_for_normal_widget(wi,last_x_days);
+					@SuppressWarnings("unchecked")
+					List<OBJECT> vals = (List<OBJECT>)data.get("values");
+					if(last_x_days == 1 && vals.size() == 1)
 					{
-						Entity last_valid_data_point = get_last_valid_widget_data_point(wi,(String) val.get(WIDGETDATA_FIELD_DATEKEY));
-						if(last_valid_data_point != null)
+						OBJECT val = vals.get(0);
+						String error = (String) val.get(WIDGETDATA_FIELD_ERROR_CODE);
+						if(error != null)
 						{
-							val.put(WIDGETDATA_FIELD_DATE_UTC,last_valid_data_point.getAttribute(WIDGETDATA_FIELD_DATE_UTC));
-							val.put(WIDGETDATA_FIELD_DATEKEY,last_valid_data_point.getAttribute(WIDGETDATA_FIELD_DATEKEY));
-							val.put(WIDGETDATA_FIELD_DATA,OBJECT.decode((String)last_valid_data_point.getAttribute(WIDGETDATA_FIELD_DATA)));
+							Entity last_valid_data_point = get_last_valid_widget_data_point(wi,(String) val.get(WIDGETDATA_FIELD_DATEKEY));
+							if(last_valid_data_point != null)
+							{
+								val.put(WIDGETDATA_FIELD_DATE_UTC,last_valid_data_point.getAttribute(WIDGETDATA_FIELD_DATE_UTC));
+								val.put(WIDGETDATA_FIELD_DATEKEY,last_valid_data_point.getAttribute(WIDGETDATA_FIELD_DATEKEY));
+								val.put(WIDGETDATA_FIELD_DATA,OBJECT.decode((String)last_valid_data_point.getAttribute(WIDGETDATA_FIELD_DATA)));
+							}
 						}
 					}
-				}
-				return data;
-			case WIDGETINSTANCE_TYPE_CORRELATION:
-				return get_data_for_correlation_widget(wi,last_x_days);
-			default:
-				return null;
+					return data;
+				case WIDGETINSTANCE_TYPE_CORRELATION:
+					return get_data_for_correlation_widget(wi,last_x_days);
+				default:
+					return null;
+			}
+		}
+		catch (OutOfMemoryError e){
+			System.out.println(e);
+			return OBJECT("oom",proxy.getId());
 		}
 	}
 	
