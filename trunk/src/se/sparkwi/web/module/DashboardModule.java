@@ -2900,7 +2900,17 @@ public class DashboardModule extends WebStoreModule implements IEventListener
 	private OBJECT get_data_for_normal_widget(Entity wi,int latest_x_days) throws PersistenceException, WebApplicationException
 	{
 		int num_data_points = latest_x_days;
-		return  OBJECT("values",ENTITIES_TO_OBJECTS(get_proxy_data(get_proxy_for_widget_instance(wi), num_data_points)));
+		List<OBJECT> data = ENTITIES_TO_OBJECTS(get_proxy_data(get_proxy_for_widget_instance(wi), num_data_points));
+		String displayStyle = (String)get_dict_attr(wi, WIDGETINSTANCE_FIELD_PROPS, "display-style");
+		if (!displayStyle.equals("map"))
+		{
+			for (OBJECT e : data)
+			{
+				OBJECT d = e.O(WIDGETDATA_FIELD_DATA);
+				d.remove("geo_values");
+			}
+		}
+		return  OBJECT("values",data);
 	}
 	
 	private OBJECT get_data_in_range_for_normal_widget(Entity wi,Date from,Date to) throws PersistenceException, WebApplicationException
