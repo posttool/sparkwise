@@ -2907,6 +2907,7 @@ public class DashboardModule extends WebStoreModule implements IEventListener
 			for (OBJECT e : data)
 			{
 				OBJECT d = e.O(WIDGETDATA_FIELD_DATA);
+				System.out.println(d);
 				d.remove("geo_values");
 			}
 		}
