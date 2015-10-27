@@ -1,0 +1,5 @@
+# Server side #
+
+A widget _definition_ is a Java class that extends `se.sparkwi.web.module.WidgetDefinition`. The standard set of widgets are defined in the package `se.sparkwi.web.widget`. To create a new data collection widget, create a new class (in that package) that implements what ever logic you need the back end service to do. For now, take a look at the existing widgets for examples. Documentation is in the works.
+
+SparkwiseOS is provided with connection adapters for Facebook Flickr, Google, Picasa, Twitter, Vimeo and You Tube. If your widgets requires a new connection type, just take a look at the existing classes in `se.sparkwi.web.module.auth.type` and make a new class like the existing. Then you must pass the deployment.properties through to your class from `se.sparkwi.web.module.auth.OAuthorizationModule`. Finally, add a static constant for your widget definition at `se.sparkwi.web.module.auth.ConnectionAPI`.

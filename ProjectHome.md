@@ -1,0 +1,3 @@
+# SparkwiseOS is designed to put data to good use. By collecting and comparing all kinds of metrics in all kinds of ways–and combining those raw numbers with embedded media–your data becomes a moving story. SparkwiseOS is free, open source and available to anybody who wants to enable others to tell their stories. #
+
+# Take a look at the [Wiki](Overview.md) for installation instructions and technical documentation. #
